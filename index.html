@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0d2733">
-<title>NEAR LAB — Olimpíada Cognitiva | Jornada 2028</title>
+<title>NEAR LAB — Treinamento Cognitivo | Jornada 2028</title>
 <style>
 :root{
   color-scheme:light;
@@ -681,6 +681,12 @@ body[data-sport]:not([data-sport=""]) .guided-orb{border-color:var(--sport-accen
 body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);border-color:var(--sport-accent)}
 @media(max-width:420px){.sport-target{width:38px;height:38px;padding:6px}.sport-direction>span{font-size:28px}.sport-demo{padding:12px}.sport-demo>span{width:48px;height:48px}}
 
+
+/* Revisão de usabilidade */
+[hidden]{display:none!important}.professional-panel{margin:12px auto;padding:16px 20px;max-width:1100px;border:1px solid var(--line,#d7e3e6);border-left:5px solid var(--brand);border-radius:18px;background:#fff;display:flex;align-items:center;flex-wrap:wrap;gap:14px 24px}.professional-panel p{margin:4px 0;color:var(--muted,#536b78)}.professional-controls{display:flex;flex-wrap:wrap;gap:12px;margin-left:auto}.professional-controls label{display:grid;gap:5px;font-size:13px;font-weight:700}.professional-controls select,.activity-tools input{min-height:44px;border:1px solid #b8ccd3;border-radius:10px;background:#fff;color:#102e3b;padding:9px 12px;font:inherit;max-width:100%}.activity-tools{margin:24px 0;display:grid;gap:8px}.activity-tools label{font-weight:750}.activity-tools p{font-size:13px;color:#536b78;margin:0}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--brand,#0b7a6c);outline-offset:3px}@media(max-width:600px){.professional-panel{margin:8px 12px;padding:14px;gap:10px}.professional-controls{margin:0;width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.professional-controls label{min-width:0}.professional-panel small{font-size:12px}.key{touch-action:manipulation}}
+@media(max-width:560px){.playbar .pb-title{flex-direction:column;align-items:flex-start;gap:3px}.playbar-in{height:auto;min-height:64px;padding-top:8px;padding-bottom:8px}.playbar .badge{white-space:normal;font-size:10px}}
+
+.signal-scene{position:relative;isolation:isolate;min-height:245px;border-radius:18px;overflow:hidden;background:var(--sport-soft);color:var(--brand)}.signal-environment{position:absolute;inset:45% 0 0;opacity:.5;z-index:-1}.signal-environment svg{width:100%;height:100%;object-fit:cover}.signal-board{position:relative;display:grid;justify-items:center;gap:5px;padding-top:18px;color:#17394a}.signal-lamp{display:grid;place-items:center;width:64px;height:64px;border:5px solid #fff;border-radius:50%;background:#17803d;color:#fff;font-size:35px;font-weight:900;box-shadow:0 3px 15px #17394a25}.signal-wait .signal-lamp{background:#b45f06}.signal-board b{padding:5px 10px;border-radius:16px;background:#fff;font-size:13px}.signal-board span{font-size:12px;background:#ffffffd9;padding:3px 8px;border-radius:8px}.signal-side{position:absolute;top:36%;width:44px;opacity:.65}.signal-side svg{width:100%;height:auto}.signal-side.left{left:8%}.signal-side.right{right:8%}.signal-athlete{height:88px;display:flex;justify-content:center}.signal-athlete svg{height:100%;width:105px}.pool.cue-go .light{fill:#17803d;filter:drop-shadow(0 0 3px #fff)}.pool .light{fill:#eab438}.pool .sw{transition:transform .55s ease-in-out}.pool{display:block;width:100%;height:auto}@media(prefers-reduced-motion:reduce){.pool .sw{transition:none}}
 </style>
 </head>
 <body data-view="home">
@@ -710,7 +716,7 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
   <div class="hero">
     <div>
       <span class="eyebrow">Psicologia do esporte · Jornada 2028</span>
-      <h1 id="homeTitle" tabindex="-1">Olimpíada <span>Cognitiva.</span></h1>
+      <h1 id="homeTitle" tabindex="-1">Treinamento <span>Cognitivo.</span></h1>
       <p class="lead">Basquete, esgrima, judô, natação, futebol e mais seis modalidades disputam desafios de atenção, memória e decisão. Sua modalidade orienta o circuito, e seus melhores resultados contribuem para a equipe.</p>
       <div class="cta-row">
         <a class="btn btn-go btn-lg" id="homeCta" href="#/jogos">Começar a jogar →</a>
@@ -829,9 +835,9 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
 <!-- EQUIPE -->
 <section class="view" id="view-team" hidden aria-labelledby="teamTitle"><div class="wrap">
   <div class="page-head">
-    <span class="eyebrow">Olimpíada · placar recreativo</span>
+    <span class="eyebrow">Treinamento · placar recreativo</span>
     <h1 id="teamTitle" tabindex="-1">Equipe.</h1>
-    <p>Ranking das modalidades pela média de pontos por atleta e placar individual online. Sem classificação de capacidade cognitiva.</p>
+    <p>Notas coletivas das modalidades e ranking individual exclusivo da sua modalidade. Sem classificação de capacidade cognitiva.</p>
   </div>
   <label class="ranking-filter">Comparar no mesmo nível <select id="rankingLevel"><option value="1">Inicial</option><option value="2">Intermediário</option><option value="3">Avançado</option></select></label><p class="notice">Ranking por melhores resultados em cada jogo. Sessões de níveis diferentes ficam separadas.</p><div id="tmSummary"></div>
   <div class="panel">
@@ -840,8 +846,8 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
     <div id="tmMods"></div>
   </div>
   <div class="panel">
-    <h2>Atletas</h2>
-    <p class="muted" style="font-size:14px">Toque em um participante para ver os pontos por jogo.</p>
+    <h2>Atletas da sua modalidade</h2>
+    <p class="muted" style="font-size:14px">Somente atletas da sua modalidade. Toque em um participante para ver os pontos por jogo.</p>
     <div id="tmBoard"></div>
   </div>
   <div class="panel">
@@ -865,7 +871,7 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
   </div>
 
   <div class="prose">
-    <p>A Olimpíada Cognitiva propõe reunir de 100 a 200 participantes em equipes de dez atletas, organizadas por modalidade. Cada equipe percorre um circuito de desafios cognitivos e momentos de reflexão, com acompanhamento da psicologia do esporte, entre 2026 e 2028.</p>
+    <p>O Treinamento Cognitivo propõe reunir de 100 a 200 participantes em equipes de dez atletas, organizadas por modalidade. Cada equipe percorre um circuito de desafios cognitivos e momentos de reflexão, com acompanhamento da psicologia do esporte, entre 2026 e 2028.</p>
     <p>Mais do que um placar, é um convite para conversar sobre como cada atleta se prepara, responde e lida com o erro. Os desafios trabalham atenção, memória e escolha de respostas para que os atletas explorem estratégias, reconheçam distrações e aprendam com cada tentativa.</p>
   </div>
   <div class="facts">
@@ -913,7 +919,7 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
 
 </main>
 
-<p class="foot-note" id="footNote">Atividades lúdicas de prática cognitiva. Não constituem teste psicológico nem avaliação clínica. Detalhes em <a href="#/sobre">Sobre</a>.</p>
+<p class="foot-note" id="footNote">Atividades lúdicas de prática cognitiva. Não constituem teste psicológico nem avaliação clínica. Detalhes em <a href="#/sobre">Sobre</a>.<br><small>Versão 02.11 · Treinamento Cognitivo</small></p>
 
 <nav class="tabbar" id="tabbar" aria-label="Principal">
   <a href="#/" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Início</a>
@@ -982,10 +988,10 @@ const G=[
  keys:'Teclado: ← → · Toque: botões',
  rule:'Vale apenas a direção da seta do meio. No Inicial ela tem destaque azul; no Intermediário e Avançado todas têm a mesma aparência, sem quadro ou cor de destaque. Ignore os estímulos laterais. Se o centro estiver vazio, não toque até a próxima rodada. No nível inicial os judocas laterais ajudam; nos níveis intermediário e avançado eles podem apontar para o lado oposto. O tempo diminui conforme o nível.'},
 {name:'Largada',skill:'Tempo de reação',time:'≈ 1 min',unit:'etapas',scene:'pool',
- desc:'Reaja ao FOEE da largada. Queimar a largada é erro.',
- steps:['Ouça: “Aos seus lugares… Prontos…”. A espera varia de 1,5 a 4 segundos.','Quando soar o FOEE e a luz ficar verde, toque LARGAR o mais rápido possível.','Largar antes do FOEE é queimar a largada e conta como erro.'],
+ desc:'Reaja ao Foee da largada. Queimar a largada é erro.',
+ steps:['Ouça: “Aos seus lugares… Prontos…”. A espera varia de 1,5 a 4 segundos.','Quando soar o Foee e a luz ficar verde, toque LARGAR o mais rápido possível.','Largar antes do Foee é queimar a largada e conta como erro.'],
  keys:'Espaço ou botão LARGAR',
- rule:'Aguarde o FOEE. A espera varia aleatoriamente de 1,5 a 4 segundos. Quando a luz da raia ficar verde, aperte espaço ou LARGAR. Antecipar conta como erro. São 12 rodadas; o tempo é medido apenas nas respostas corretas e exibido a cada largada.'},
+ rule:'Aguarde o Foee. A espera varia aleatoriamente de 1,5 a 4 segundos. Quando a luz da raia ficar verde, aperte espaço ou LARGAR. Antecipar conta como erro. São 12 rodadas; o tempo é medido apenas nas respostas corretas e exibido a cada largada.'},
 {name:'Voga e comando',skill:'Atenção dividida',time:'≈ 1 min',unit:'etapas',scene:'river',
  desc:'Duas tarefas ao mesmo tempo: o lado da remada e o comando do timoneiro.',
  steps:['Esquerda: o lado do barco com as pás acesas. Toque Bombordo (esquerda) ou Boreste (direita).','Direita: o timoneiro grita um número. Toque Par ou Ímpar.','A rodada só pontua se as duas respostas estiverem certas dentro do tempo.'],
@@ -1037,7 +1043,7 @@ const searchWords=[{"word": "CESTA", "sport": "Basquete", "hint": "Está ligada 
 
 /* ---------- estado ---------- */
 const KEY='near-lab-cloud-cache-v4',PKEY='near-lab-cloud-level-v3',SKEY='near-lab-som';
-let records=[],profile=null,curLevel=1,hFilter='all';
+let records=[],profile=null,curLevel=1,hFilter='all',rankingScope=null,modalitySummary=[];
 let selected=0,active=false,token=0,timers=[],pending=false,round=0,hits=0,errors=0,rts=[],onset=0,expected=null,level=1,seq=[],pos=0,total=12,identity='',mode='real',stageName='intro',streak=0;
 let digitOrder=[],digitPos=0,secret='',attempts=0,currentWord=null,falseStarts=0,skipped=0,usedWords=new Set(),codeInput=null;
 let bb={ball:null,spots:[],pass:null};
@@ -1057,7 +1063,7 @@ function writeLocal(key,value){try{localStorage.setItem(key,JSON.stringify(value
 function cloudStatus(message){cloudMessage=message;const n=$('cloudStatus');if(n)n.textContent=message;if($('storage'))$('storage').textContent=message;}
 function setSession(data){authSession={...data,expires_at:data.expires_at||Math.floor(Date.now()/1000)+(data.expires_in||3600)};writeLocal(SESSION_KEY,authSession)}
 function usernameOf(user){return (user.email||'').split('@')[0]}
-function setAccount(user){const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';if(profile.therapist){try{profile.mod=sessionStorage.getItem('near-therapy-mod-'+user.id)||profile.mod}catch{}}curLevel=profile.level;}
+function setAccount(user){rankingScope=user.app_metadata?.near_rank_mod||user.user_metadata?.modalidade||null;modalitySummary=[];const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';if(profile.therapist){try{profile.mod=modById(sessionStorage.getItem('near-therapy-mod-'+user.id))?.id||profile.mod}catch{}}curLevel=profile.level;}
 async function authRequest(path,body,access){
   const res=await fetch(SUPABASE_URL+'/auth/v1/'+path,{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json',...(access?{Authorization:'Bearer '+access}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000)});
   const data=await res.json().catch(()=>({}));
@@ -1100,8 +1106,9 @@ function syncCloud(){
       if(!res.ok){const error=await res.json().catch(()=>({}));if(!(res.status===409&&error.code==='23505'))throw new Error('Envio recusado ('+res.status+'). Confira a tabela resultados e suas permissões.');}
       outbox=outbox.filter(x=>x.id!==r.id);writeLocal(QUEUE_KEY,outbox);
     }
+    const contextRes=await databaseRequest('rpc/near_ranking_context',{method:'POST',body:'{}'});if(!contextRes.ok){records=[];persist();throw new Error('Ative o SQL de privacidade do ranking no Supabase.');}const context=await contextRes.json();if(profile?.id!==owner)return;rankingScope=context.modality;modalitySummary=context.summary||[];records=records.filter(r=>r.mod===rankingScope);persist();
     const all=[];let offset=0;
-    while(true){const res=await databaseRequest('resultados?select=*&order=criado_em.asc,id.asc&limit=500&offset='+offset);if(!res.ok)throw new Error('Não foi possível consultar o ranking ('+res.status+'). Confira as permissões.');const rows=await res.json();all.push(...rows.map(cloudRecord));if(rows.length<500)break;offset+=rows.length;}
+    while(true){const res=await databaseRequest('resultados?select=*&modalidade=eq.'+encodeURIComponent(rankingScope||'__nenhuma__')+'&order=criado_em.asc,id.asc&limit=500&offset='+offset);if(!res.ok)throw new Error('Não foi possível consultar o ranking ('+res.status+'). Confira as permissões.');const rows=await res.json();all.push(...rows.map(cloudRecord));if(rows.length<500)break;offset+=rows.length;}
     if(profile?.id!==owner)return;
     const ids=new Set(all.map(r=>r.id));records=all.concat(outbox.filter(r=>r.athleteId===owner&&!ids.has(r.id)));persist();
     const count=outbox.filter(r=>r.athleteId===owner).length;cloudStatus(count?count+' resultado(s) pendente(s) neste aparelho.':'Pontos sincronizados online · '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));repaintCloud();await syncNear();
@@ -1110,7 +1117,7 @@ function syncCloud(){
 async function bootCloud(){
   outbox=readLocal(QUEUE_KEY,[]);if(!Array.isArray(outbox))outbox=[];
   const saved=readLocal(SESSION_KEY,null);
-  if(saved?.access_token&&saved?.refresh_token&&saved?.user?.id){authSession=saved;setAccount(saved.user);records=readLocal(KEY,[]);if(!Array.isArray(records))records=[];}
+  if(saved?.access_token&&saved?.refresh_token&&saved?.user?.id){authSession=saved;setAccount(saved.user);records=readLocal(KEY,[]);if(!Array.isArray(records))records=[];records=records.filter(r=>rankingScope&&r.mod===rankingScope);persist();}
   if(profile){try{const token=await accessToken();const res=await fetch(SUPABASE_URL+'/auth/v1/user',{headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)});if(res.ok){const user=await res.json();authSession.user=user;setSession(authSession);setAccount(user)}}catch{}}
   route();if(profile)await syncCloud();
 }
@@ -1413,11 +1420,12 @@ const GUIDED=[
 {id:'mentalizacao',name:'Mentalização · roteiro de ação',goal:'Preparação mental',seconds:120,about:'Organizar intenções e respostas possíveis para uma situação esportiva. Aqui, mentalização é um roteiro de decisões; é relacionada à visualização.',use:'Antes de treinar ou competir, para escolher como agir diante de uma dificuldade realista.',steps:['Escolha uma situação familiar do seu esporte. Não precisa compartilhar nada na tela.','Defina como quer agir: com dedicação, respeito, coragem ou cuidado. Escolha uma intenção concreta.','Pense em uma dificuldade possível: erro, espera ou distração. Emoções podem aparecer e não precisam ser eliminadas.','Ensaie uma resposta pequena e possível: reconhecer a reação, retomar uma palavra-chave e voltar à tarefa.','Escolha uma frase de ação e um primeiro passo para experimentar no próximo treino.']},
 {id:'visualizacao',name:'Visualização · ensaio sensorial',goal:'Preparação mental',seconds:120,about:'Ensaiar mentalmente uma execução conhecida, incluindo ambiente, sensações e retomada após um imprevisto. Não substitui treino técnico.',use:'Para ensaiar uma habilidade que você já conhece, alinhada com as orientações da equipe.',steps:['Escolha um movimento ou rotina familiar, que você já pratica com segurança. Você pode manter os olhos abertos.','Imagine o ambiente: espaço, sons e pontos de referência. Se imagens forem difíceis, use palavras e sensações.','Ensaie a ação no seu ritmo real, percebendo o corpo e uma orientação técnica conhecida. Não invente uma habilidade nova.','Inclua um pequeno imprevisto ou erro. Ensaie reconhecer a reação e retomar uma ação útil, sem exigir uma execução perfeita.','Retorne ao ambiente. Escolha um detalhe do ensaio para conversar com sua equipe e experimentar no treino.']}
 ];
-let guidedId='atencao',guidedSkipHolds=false,guidedFree=false,guidedElapsed=0;
+GUIDED.push({id:'descanso',name:'Respiração para o descanso · 4–6',goal:'Preparar para descansar',seconds:120,about:'Um ritmo suave, sem segurar o ar, para experimentar ao se preparar para dormir.',use:'Em uma posição confortável, antes de descansar. Se preferir, acompanhe no ritmo natural.',phases:[['Inspire suavemente',4,'in'],['Solte o ar devagar',6,'out']]});
+let guidedVoice=true;let guidedId='atencao',guidedSkipHolds=false,guidedFree=false,guidedElapsed=0;
 function guidedChoice(){
-  const box=$('inDemo');box.innerHTML='<div class="guided-picker"><h3>Qual prática faz sentido agora?</h3><label class="field">Escolha na hora<select id="guidedChoice">'+GUIDED.map(g=>'<option value="'+g.id+'">'+esc(displayGame(g).name)+' · '+g.seconds+' s</option>').join('')+'</select></label><div id="guidedAbout"></div><label class="guided-check"><input id="guidedNoHolds" type="checkbox"> Prefiro acompanhar sem segurar o ar</label><p class="notice">Pratique em repouso, fora da água e em local seguro. Respire suavemente, sem forçar. Se houver tontura ou falta de ar, interrompa e volte à respiração habitual. Você pode parar a qualquer momento.</p></div>';
-  $('guidedChoice').value=guidedId;$('guidedNoHolds').checked=guidedSkipHolds;
-  const paint=()=>{const p=GUIDED.find(g=>g.id===guidedId);$('guidedAbout').innerHTML='<b>'+esc(p.goal)+'</b><p>'+esc(p.about)+'</p><p><b>Quando experimentar:</b> '+esc(p.use)+'</p><p class="notice">Apenas uma pausa completa recebe 10 pontos NEAR por dia, mesmo se você fizer outras técnicas.</p>';$('guidedNoHolds').parentElement.hidden=!p.phases?.some(x=>x[2]==='hold');};
+  const box=$('inDemo');box.innerHTML='<div class="guided-picker"><h3>Qual prática faz sentido agora?</h3><label class="field">Escolha na hora<select id="guidedChoice">'+GUIDED.map(g=>'<option value="'+g.id+'">'+esc(displayGame(g).name)+' · '+g.seconds+' s</option>').join('')+'</select></label><div id="guidedAbout"></div><label class="guided-check"><input id="guidedVoice" type="checkbox"> Guia por voz (com o som ligado)</label><label class="guided-check"><input id="guidedNoHolds" type="checkbox"> Prefiro acompanhar sem segurar o ar</label><p class="notice">Respire suavemente, sem forçar. As pausas são opcionais. Você pode encerrar quando quiser.</p></div>';
+  $('guidedVoice').checked=guidedVoice;$('guidedVoice').disabled=!('speechSynthesis' in window);$('guidedVoice').onchange=e=>guidedVoice=e.target.checked;$('guidedChoice').value=guidedId;$('guidedNoHolds').checked=guidedSkipHolds;
+  const paint=()=>{const p=GUIDED.find(g=>g.id===guidedId);$('guidedAbout').innerHTML='<b>'+esc(p.goal)+'</b><p>'+esc(p.about)+'</p><p><b>Quando experimentar:</b> '+esc(p.use)+'</p><p class="notice">'+(isTherapist()?'Prática de atendimento, sem registro e sem pontos NEAR.':'Apenas uma pausa completa recebe 10 pontos NEAR por dia, mesmo com outras técnicas.')+'</p>';$('guidedNoHolds').parentElement.hidden=!p.phases?.some(x=>x[2]==='hold');};
   $('guidedChoice').onchange=e=>{guidedId=e.target.value;paint()};$('guidedNoHolds').onchange=e=>guidedSkipHolds=e.target.checked;paint();
 }
 function guidedPractice(s){
@@ -1425,10 +1433,11 @@ function guidedPractice(s){
   s.className='scene-title';s.textContent=practice.name;const orb=el('div','guided-orb'),clock=el('b','guided-clock'),prompt=el('p','guided-prompt');
   $('arena').append(orb,clock,prompt,el('small','notice','Siga de modo confortável. Não é um teste de respiração. Você pode manter os olhos abertos e voltar à respiração natural.'));
   if(practice.phases)$('arena').append(button('Prefiro respirar naturalmente',()=>{guidedFree=true;prompt.textContent='Deixe o ar entrar e sair no seu ritmo, sem forçar.'},'btn btn-sm'));
-  const began=performance.now(),duration=practice.seconds*1000;let previousPhase='';
+  const began=performance.now(),duration=practice.seconds*1000;let previousPhase='',lastSpoken='';
   const tick=()=>{guidedElapsed=Math.min(practice.seconds,(performance.now()-began)/1000);const remaining=Math.max(0,Math.ceil(practice.seconds-guidedElapsed));clock.textContent=remaining+' s restantes';$('pBar').style.width=(guidedElapsed/practice.seconds*100)+'%';
     if(practice.phases&&!guidedFree){const phases=practice.phases.filter(p=>!guidedSkipHolds||p[2]!=='hold'),cycle=phases.reduce((a,p)=>a+p[1],0);let position=guidedElapsed%cycle,phase=phases[0];for(const p of phases){if(position<p[1]){phase=p;break}position-=p[1];}orb.textContent=String(Math.max(1,Math.ceil(phase[1]-position)));prompt.textContent=phase[0];if(previousPhase!==phase[0]){orb.className='guided-orb '+phase[2];previousPhase=phase[0];}}
     else{orb.className='guided-orb natural';orb.textContent='Presente';if(!guidedFree){const index=Math.min(practice.steps.length-1,Math.floor(guidedElapsed/practice.seconds*practice.steps.length));prompt.textContent=practice.steps[index];}else prompt.textContent='Deixe o ar entrar e sair no seu ritmo, sem forçar.';}
+    if(prompt.textContent!==lastSpoken){lastSpoken=prompt.textContent;if(guidedVoice)speakGuide(lastSpoken);}
     if(remaining<=0){finishGuided(practice);return}later(tick,100);};tick();
 }
 function finishGuided(practice){if(isTherapist()){active=false;cancel();therapistResult(practice.name,'Prática concluída.');return;}
@@ -1445,7 +1454,7 @@ function tone(f,t0,d,type,vol){const c=audio();if(!c)return;const o=c.createOsci
 function sfx(k){if(!soundOn)return;const m={ok:()=>{tone(660,0,.08);tone(880,.07,.12)},bad:()=>tone(160,0,.22,'sawtooth',.1),tick:()=>tone(520,0,.07,'triangle',.09),go:()=>tone(990,0,.3,'square',.07),beep:()=>tone(1000,0,.35,'square',.08),win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.2,'triangle',.12))};(m[k]||(()=>{}))()}
 const SND_ON=svg('<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>'),SND_OFF=svg('<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/>');
 function renderSnd(){const b=$('sndBtn');b.innerHTML=soundOn?SND_ON:SND_OFF;b.setAttribute('aria-pressed',String(soundOn));b.setAttribute('aria-label',soundOn?'Som ligado. Silenciar':'Som desligado. Ligar')}
-$('sndBtn').onclick=()=>{soundOn=!soundOn;try{localStorage.setItem(SKEY,soundOn?'on':'off')}catch{}renderSnd();if(soundOn){audio();sfx('tick')}};
+$('sndBtn').onclick=()=>{soundOn=!soundOn;try{localStorage.setItem(SKEY,soundOn?'on':'off')}catch{}renderSnd();if(!soundOn)stopGuideVoice();if(soundOn){audio();sfx('tick')}};
 
 /* ---------- pontuação ---------- */
 function playerKey(n){return n.trim().normalize('NFC').toLocaleLowerCase('pt-BR')}
@@ -1454,7 +1463,7 @@ function ptsOf(r){return Number.isFinite(r.points)?r.points:r.accuracy}
 function medalOf(acc){return acc>=90?0:acc>=70?1:acc>=50?2:3}
 const MEDAL=[['gold','Ouro'],['silver','Prata'],['bronze','Bronze'],['part','Participação']];
 function totals(){
-  const map=new Map();for(const r of records){const id=gid(r);if(r.level!==curLevel||id<0||!games[id]?.competitive)continue;
+  const map=new Map();for(const r of visibleRankingRecords()){const id=gid(r);if(r.level!==curLevel||id<0||!games[id]?.competitive)continue;
     const k=r.athleteId||playerKey(r.athlete);if(!map.has(k))map.set(k,{name:r.athlete,mod:r.mod||null,games:Array(games.length).fill(0),counts:Array(games.length).fill(0),total:0,sessions:0});
     const row=map.get(k);if(r.mod)row.mod=r.mod;row.games[id]=Math.max(row.games[id],ptsOf(r));row.counts[id]++;row.sessions++;
   }for(const row of map.values())row.total=row.games.reduce((a,b)=>a+b,0);
@@ -1535,16 +1544,16 @@ function gameCard(g,name){
   g=displayGame(g);
   const best=bestFor(name,g.id),mine=profile&&g.m&&g.m.id===profile.mod;
   let chip;
-  if(g.educational||g.id===10)chip='<span class="st">'+(nearState.credited.includes(nearKey(g.id))?'Crédito diário recebido':'+10 NEAR/dia')+'</span>';
+  if(isTherapist())chip='<span class="st">Treino sem pontuação</span>';else if(g.educational||g.id===10)chip='<span class="st">'+(nearState.credited.includes(nearKey(g.id))?'Crédito diário recebido':'+10 NEAR/dia')+'</span>';
   else chip=best==null?'<span class="st new">Novo</span>':'<span class="st done">Melhor '+best+'%</span>';
-  const meta=g.educational?'3 a 5 situações · sem ranking emocional':g.id===10?'8 práticas · você escolhe':!g.competitive?'1 minuto':g.time+' · '+RT[g.id]+' '+g.unit;
+  const meta=g.educational?'3 a 5 situações · sem ranking emocional':g.id===10?GUIDED.length+' práticas · você escolhe':!g.competitive?'1 minuto':g.time+' · '+RT[g.id]+' '+g.unit;
   return '<a class="gcard" href="#/jogar/'+g.id+'" style="--c:'+g.c+'"><div class="top">'+icoHTML(g)+chip+'</div><div><small class="mod">'+esc(displayGame(g).cat)+(mine?'<em>seu esporte</em>':'')+'</small><h3>'+esc(g.id===10?'Pausa guiada':g.id===25?'Quiz de '+(modById(profile?.mod)?.name||'sua modalidade'):g.name)+'</h3><p>'+esc(g.desc)+'</p><p class="skill">'+esc(g.skill)+'</p></div><div class="foot"><span>'+meta+'</span><span class="go">Jogar →</span></div></a>';
 }
 function renderGames(){
   const name=profile?profile.name:'';const pm=profile?modById(profile.mod):null;
   $('gmHello').textContent=name?'Olá, '+name+(pm?' · '+pm.name:''):'Jogos';
   const row=rowFor(name),rk=name?rankOf(name):null,played=playedCount(row);
-  $('gmProgress').innerHTML='<div class="progress-card"><div class="pc-item"><small>Seus pontos</small><b class="pts">'+(row?row.total:0)+'</b></div><div class="pc-item"><small>Jogos jogados</small><b>'+played+' de '+COMP_COUNT+'</b></div><div class="pc-item"><small>Posição individual</small><b>'+(rk?rk.place+'º':'—')+'</b></div><div class="pc-bar"><small class="muted" style="font-size:12px;font-weight:650">Seu circuito</small><div class="bar"><i style="width:'+Math.round(played/COMP_COUNT*100)+'%"></i></div></div></div>';
+  $('gmProgress').innerHTML='<div class="progress-card"><div class="pc-item"><small>Seus pontos</small><b class="pts">'+(row?row.total:0)+'</b></div><div class="pc-item"><small>Jogos jogados</small><b>'+played+' de '+COMP_COUNT+'</b></div><div class="pc-item"><small>Posição na modalidade</small><b>'+(rk?rk.place+'º':'—')+'</b></div><div class="pc-bar"><small class="muted" style="font-size:12px;font-weight:650">Seu circuito</small><div class="bar"><i style="width:'+Math.round(played/COMP_COUNT*100)+'%"></i></div></div></div>';
   const s=suggestNext(name,-1),sg=games[s.id];
   $('gmSuggest').innerHTML='<div class="suggest">'+icoHTML(sg)+'<div class="tx"><small>'+(s.own?'Prioridade do seu circuito':s.unplayed?'Próximo desafio sugerido':'Que tal melhorar?')+'</small><b>'+esc(displayGame(sg).cat)+' · '+esc(displayGame(sg).name)+'</b></div><a class="btn btn-go" href="#/jogar/'+sg.id+'">Jogar agora →</a></div>';
   $('gmSuggest').innerHTML+='<div class="circuit-note"><b>Foco do seu circuito</b><p>'+esc(MOD_FOCUS[profile?.mod]||'Conheça os desafios e escolha seu esporte ao entrar.')+'</p><small>Ordem sugerida pela organização; não é uma avaliação individual. As regras são comuns a todas as modalidades.</small></div>';
@@ -1597,7 +1606,7 @@ const FENCE_SVG='<svg class="strip" viewBox="0 0 320 150" aria-hidden="true"><re
 const POOL_SVG='<svg class="pool" viewBox="0 0 320 150" aria-hidden="true"><defs><linearGradient id="pw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b8e6ef"/><stop offset="1" stop-color="#86cfe0"/></linearGradient></defs><rect width="320" height="150" rx="10" fill="url(#pw)"/><rect width="26" height="150" rx="10" fill="#dfe6ea"/>'
  +'<g stroke="#fff" stroke-width="3" stroke-dasharray="4 5" opacity=".9"><path d="M26 20H320M26 46H320M26 72H320M26 98H320M26 124H320"/></g>'
  +'<g fill="#9fb0ba"><rect x="6" y="26" width="16" height="14" rx="3"/><rect x="6" y="52" width="16" height="14" rx="3"/><rect x="6" y="78" width="16" height="14" rx="3"/><rect x="6" y="104" width="16" height="14" rx="3"/></g><rect x="4" y="52" width="20" height="14" rx="3" fill="none"/>'
- +'<g class="sw"><ellipse cx="60" cy="85" rx="20" ry="7" fill="#f0c9a0"/><circle cx="75" cy="85" r="7" fill="#1098ad" stroke="#0b6f80" stroke-width="2"/></g>'
+ +'<g class="sw"><path class="sw-wake" d="M22 79q7-5 14 0m-16 12q8 5 16 0" fill="none" stroke="#fff" stroke-width="3"/><path d="M43 84l16-4 12 4-12 5z" fill="#163c59"/><path d="M50 83l8-12 16 7M50 87l-12 5-9-2" fill="none" stroke="#e2ad86" stroke-width="5" stroke-linecap="round"/><circle cx="76" cy="84" r="7" fill="#efbd94"/><path d="M70 81q1-8 9-5l4 6z" fill="#e84b37"/><path d="M77 83h6" stroke="#18364a" stroke-width="3"/></g>'
  +'<circle class="light" cx="302" cy="85" r="8"/><text x="13" y="62" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">3</text></svg>';
 function boatSVG(side){
   const ys=[40,58,76,94];let oars='';
@@ -1627,7 +1636,7 @@ function demoHTML(i){if(games[i]?.educational)return '<p class="demo-cap">Situa�
   if(i===2)return lab+'<div class="target-line" style="--c:#c2255c">Atleta <b>42</b></div><div class="bibs mini" style="grid-template-columns:repeat(3,1fr)"><span class="bib">24</span><span class="bib right">42</span><span class="bib">47</span></div>'+cap('Toque a ficha <b>42</b>, não a 24.');
   if(i===3)return lab+'<div class="demo-row"><span class="medal-ring" style="--ap:#ae3ec9">'+APP.fita.svg+'</span><span class="stim" style="font-size:44px">→</span></div>'+cap('Fita: siga. Toque <b>Direita</b>.')+'<div class="demo-row"><span class="medal-ring" style="--ap:#e03131">'+APP.bola.svg+'</span><span class="stim" style="font-size:44px">→</span></div>'+cap('Bola: inverta. Toque <b>Esquerda</b>.');
   if(i===4)return lab+'<div class="jrow"><span class="jd">←</span><span class="jd">←</span><span class="jd c">→</span><span class="jd">←</span><span class="jd">←</span></div>'+cap('Só vale o judoca azul: toque <b>Direita →</b>.');
-  if(i===5)return lab+'<div class="pool-wrap">'+POOL_SVG.replace('class="pool"','class="pool"')+'</div><div class="demo-row"><span class="pill wait">Prontos…</span><span>→</span><span class="pill go">FOEE!</span></div>'+cap('Toque LARGAR só depois do <b>FOEE</b>.');
+  if(i===5)return lab+'<div class="pool-wrap">'+POOL_SVG.replace('class="pool"','class="pool"')+'</div><div class="demo-row"><span class="pill wait">Prontos…</span><span>→</span><span class="pill go">Foee!</span></div>'+cap('Toque LARGAR só depois do <b>Foee</b>.');
   if(i===6)return lab+'<div class="demo-row" style="align-items:flex-start;gap:20px">'+boatSVG(0)+'<div class="bubble">47!</div></div>'+cap('Pás acesas à esquerda: <b>Bombordo</b>. Número 47: <b>Ímpar</b>.');
   if(i===7)return lab+'<div class="tenn">'+tennisSVG(2).replace('class="lane" data-z="2"','class="lane hit" data-z="2"')+'</div><div class="callout">Juiz de linha: ESQUERDA</div>'+cap('A bola quicou à direita: toque <b>Direita</b>.');
   if(i===8)return lab+'<div class="shirts-board" style="gap:2px"><span class="jersey" style="width:52px;height:52px">'+JERSEY(23)+'</span><span class="jersey" style="width:52px;height:52px">'+JERSEY(7)+'</span><span class="jersey" style="width:52px;height:52px">'+JERSEY(41)+'</span></div>'+cap('Crescente: toque <b>7 → 23 → 41</b>.');
@@ -1677,7 +1686,7 @@ $('backBtn').onclick=()=>{if(stageName==='run'&&active)abortRun('Você encerrou 
 
 /* ---------- motor ---------- */
 function later(fn,ms){const t=token;timers.push(setTimeout(()=>{if(t===token&&active)fn()},ms))}
-function cancel(){timers.forEach(clearTimeout);timers=[];token++;pending=false;codeInput=null}
+function cancel(){stopGuideVoice();timers.forEach(clearTimeout);timers=[];token++;pending=false;codeInput=null}
 function rand(n){return Math.floor(Math.random()*n)}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
 function fb(text,kind){
@@ -1740,10 +1749,14 @@ function memory(i){
 }
 
 /* 1 · Esgrima — Finta e estocada (controle de impulsos) */
+function signalScene(real){
+ const label=real?'SINAL VÁLIDO':'DISTRAÇÃO · AGUARDE';
+ return '<div class="signal-scene '+(real?'signal-go':'signal-wait')+'"><div class="signal-environment">'+sportSurfaceSVG()+'</div><div class="signal-side left" aria-hidden="true">'+sportArt(sportTheme()?.kit[1]||'ball')+'</div><div class="signal-side right" aria-hidden="true">'+sportArt(sportTheme()?.kit[2]||'ball')+'</div><div class="signal-board"><div class="signal-lamp">'+(real?'✓':'Ⅱ')+'</div><b>'+label+'</b><span>'+(real?'Responda agora':'Deixe o sinal passar')+'</span></div><div class="signal-athlete" aria-hidden="true"><svg viewBox="0 0 100 80"><circle cx="53" cy="16" r="8" fill="#e8b68e"/><path d="M48 29l-9 20 19 5 8-20z" fill="currentColor"/><path d="M44 35L24 45M62 35l15 9M43 53L30 72M57 55l15 17" fill="none" stroke="#17394a" stroke-width="7" stroke-linecap="round"/></svg></div></div>';
+}
 function fenceGame(s){
   const limit=[2400,1250,850][level-1];const real=Math.random()<.65;expected=real?1:0;
   s.className='stim call';s.textContent=real?'VÁ!':'ESPERE!';s.style.color=real?'#17803d':'#b45f06';
-  const wrap=el('div','strip-wrap');wrap.innerHTML='<div class="sport-cue-scene '+(real?'cue-go':'cue-wait')+'">'+sportSurfaceSVG()+'<span>'+sportArt(sportTheme()?.kit[0]||'ball')+'</span></div>';$('arena').append(wrap);
+  const wrap=el('div','strip-wrap');wrap.innerHTML=signalScene(real);$('arena').append(wrap);
   controls(['RESPONDER / espaço'],()=>respond(1),'btn btn-go btn-lg');
   pending=true;onset=performance.now();limitBar(limit);later(()=>respond(0),limit);
 }
@@ -1793,25 +1806,16 @@ function judoGame(s){
 }
 
 /* 5 · Natação — Largada (tempo de reação) */
-function swimStartSound(){
-  if(!soundOn)return;
-  if(profile?.mod==='natacao'){
-    if('speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined'){
-      speechSynthesis.cancel();const cue=new SpeechSynthesisUtterance('FOEE');cue.lang='pt-BR';cue.rate=1;cue.volume=1;speechSynthesis.speak(cue);
-    }
-    return;
-  }
-  sfx('beep');
-}
+function swimStartSound(){sfx('beep');}
 function swimGame(s){
   expected='wait';pending=true;
   s.className='stim call';s.style.color='#856b10';s.textContent='Prepare-se…';
-  const wrap=el('div','pool-wrap');wrap.innerHTML='<div class="sport-cue-scene">'+sportSurfaceSVG()+'<span>'+sportArt(sportTheme()?.kit[0]||'ball')+'</span></div>';$('arena').append(wrap);
+  const wrap=el('div','pool-wrap');wrap.innerHTML=profile?.mod==='natacao'?POOL_SVG:'<div class="sport-cue-scene">'+sportSurfaceSVG()+'<span>'+sportArt(sportTheme()?.kit[0]||'ball')+'</span></div>';$('arena').append(wrap);
   controls(['INICIAR / espaço'],()=>respond(1),'btn btn-go btn-lg');
-  fb('Espere o FOEE.','');
+  fb(profile?.mod==='natacao'?'Espere o Foee.':'Espere o sinal de largada.','');
   const wait=1500+rand(2501);
   if(wait>1900)later(()=>{s.textContent='Prontos…'},900);
-  later(()=>{s.textContent=profile?.mod==='natacao'?'FOEE!':'JÁ!';s.style.color='#17803d';wrap.firstChild.classList.add('cue-go');swimStartSound();expected=1;onset=performance.now();fb('Responda agora!','');const lim=[2500,1800,1200][level-1];limitBar(lim);later(()=>respond(-1),lim)},wait);
+  later(()=>{s.textContent=profile?.mod==='natacao'?'Foee!':'JÁ!';s.style.color='#17803d';wrap.firstChild.classList.add('cue-go');swimStartSound();expected=1;onset=performance.now();fb('Responda agora!','');const lim=[2500,1800,1200][level-1];limitBar(lim);later(()=>respond(-1),lim)},wait);
 }
 
 /* 6 · Remo — Voga e comando (atenção dividida) */
@@ -1994,24 +1998,24 @@ function renderTeam(){
   const rows=totals(),pl=places(rows,r=>r.total),name=profile?profile.name:'';
   const mr=modRows(),mpl=places(mr,x=>x.avg);
   const activeMods=mr.filter(x=>x.n>0).length;
-  $('tmSummary').innerHTML='<div class="sum3"><div><small>Atletas</small><b>'+rows.length+'</b></div><div><small>Modalidades em disputa</small><b>'+activeMods+' de '+mods.length+'</b></div><div><small>Sessões registradas</small><b>'+records.length+'</b></div></div>';
+  $('tmSummary').innerHTML='<div class="sum3"><div><small>Atletas</small><b>'+rows.length+'</b></div><div><small>Modalidades em disputa</small><b>'+activeMods+' de '+mods.length+'</b></div><div><small>Sessões registradas</small><b>'+visibleRankingRecords().length+'</b></div></div>';
   const me=rowFor(name),rk=name?rankOf(name):null;
   if(name&&modById(profile.mod)){
-    const pm=modById(profile.mod),mi=mr.findIndex(x=>x.m.id===profile.mod);
-    $('tmSummary').innerHTML+=me?'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><div class="mc"><small>Posição individual</small><b>'+rk.place+'º de '+rk.of+'</b></div><div class="mc"><small>Pontos</small><b>'+me.total+'</b></div><div class="mc"><small>Sua modalidade</small><b>'+(mr[mi].n?mpl[mi]+'º':'—')+'</b></div><a class="btn btn-go" href="#/jogos">Jogar</a></div>':'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><span>Complete uma sessão para entrar no placar.</span><a class="btn btn-go" href="#/jogos">Jogar agora</a></div>';
+    const pm=modById(rankingScope)||modById(profile.mod),mi=mr.findIndex(x=>x.m.id===pm.id);
+    $('tmSummary').innerHTML+=me?'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><div class="mc"><small>Posição na modalidade</small><b>'+rk.place+'º de '+rk.of+'</b></div><div class="mc"><small>Pontos</small><b>'+me.total+'</b></div><div class="mc"><small>Sua modalidade</small><b>'+(mr[mi].n?mpl[mi]+'º':'—')+'</b></div><a class="btn btn-go" href="#/jogos">Jogar</a></div>':'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><span>Complete uma sessão para entrar no placar.</span><a class="btn btn-go" href="#/jogos">Jogar agora</a></div>';
   }
   const maxAvg=Math.max(1,...mr.map(x=>x.avg));
-  $('tmMods').innerHTML=mr.map((x,i)=>{const mine=profile&&x.m.id===profile.mod;
+  $('tmMods').innerHTML=mr.map((x,i)=>{const mine=profile&&x.m.id===rankingScope;if(!mine)return '<div class="mrow" style="--c:'+x.m.c+'"><span class="pl">'+(x.n?mpl[i]:'—')+'</span><span class="ico">'+x.m.icon+'</span><span class="mname"><b>'+esc(x.m.name)+'</b><small>Nota coletiva · sem dados individuais</small></span><b class="lb-pts">'+(x.n?num1(x.avg):'—')+'</b></div>';
     return '<div class="mrow'+(mine?' me':'')+'" style="--c:'+x.m.c+'"><span class="pl'+(x.n?' pl'+mpl[i]:'')+'">'+(x.n?mpl[i]:'—')+'</span><span class="ico">'+x.m.icon+'</span><span class="mname"><b>'+esc(x.m.name)+(mine?'<em>sua equipe</em>':'')+'</b><small>'+x.n+(x.n===1?' atleta':' atletas')+' · '+x.sessions+(x.sessions===1?' sessão':' sessões')+'</small></span><span class="lb-bar"><i style="width:'+Math.round(x.avg/maxAvg*100)+'%;background:'+x.m.c+'"></i></span><b class="lb-pts">'+(x.n?num1(x.avg):'—')+'</b><span class="medals" aria-label="Medalhas: '+x.medals[0]+' ouro, '+x.medals[1]+' prata, '+x.medals[2]+' bronze"><i class="md g"></i>'+x.medals[0]+'<i class="md s"></i>'+x.medals[1]+'<i class="md b"></i>'+x.medals[2]+'</span></div>'}).join('');
   const max=Math.max(1,...rows.map(r=>r.total));
   $('tmBoard').innerHTML=rows.length?rows.map((r,i)=>{const mine=name&&playerKey(r.name)===playerKey(name);const m=modById(r.mod);
-    return '<details class="lb'+(mine?' me':'')+'"><summary><span class="pl pl'+pl[i]+'">'+pl[i]+'</span><span class="lb-name">'+esc(r.name)+(m?'<em class="tag" style="--c:'+m.c+'">'+esc(m.name)+'</em>':'')+(mine?'<em>você</em>':'')+'</span><span class="lb-bar"><i style="width:'+Math.round(r.total/max*100)+'%"></i></span><b class="lb-pts">'+r.total+'</b><span class="lb-ses">'+r.sessions+(r.sessions===1?' sessão':' sessões')+'</span></summary><div class="lb-det">'+games.filter(g=>g.competitive).map(g=>'<span>'+esc(displayGame(g).cat)+' · '+esc(displayGame(g).name)+'<b>'+r.games[g.id]+'</b></span>').join('')+'</div></details>'}).join(''):'<div class="empty"><p>Placar zerado. Complete uma sessão para começar a olimpíada.</p><a class="btn btn-go" href="#/jogos">Ir para os jogos</a></div>';
+    return '<details class="lb'+(mine?' me':'')+'"><summary><span class="pl pl'+pl[i]+'">'+pl[i]+'</span><span class="lb-name">'+esc(r.name)+(m?'<em class="tag" style="--c:'+m.c+'">'+esc(m.name)+'</em>':'')+(mine?'<em>você</em>':'')+'</span><span class="lb-bar"><i style="width:'+Math.round(r.total/max*100)+'%"></i></span><b class="lb-pts">'+r.total+'</b><span class="lb-ses">'+r.sessions+(r.sessions===1?' sessão':' sessões')+'</span></summary><div class="lb-det">'+games.filter(g=>g.competitive).map(g=>'<span>'+esc(displayGame(g).cat)+' · '+esc(displayGame(g).name)+'<b>'+r.games[g.id]+'</b></span>').join('')+'</div></details>'}).join(''):'<div class="empty"><p>Placar zerado. Complete uma sessão para começar o treinamento.</p><a class="btn btn-go" href="#/jogos">Ir para os jogos</a></div>';
   renderHistory();
 }
 function renderHistory(){
   const name=profile?profile.name:'';
   document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===hFilter));
-  let list=records.slice().reverse();
+  let list=visibleRankingRecords().slice().reverse();
   if(hFilter==='mine')list=name?list.filter(r=>playerKey(r.athlete)===playerKey(name)):[];
   $('tmHistory').innerHTML=list.length?list.slice(0,30).map(r=>{const id=gid(r),md=MEDAL[medalOf(r.accuracy)];return '<div class="hrow"><div><b>'+esc(displayGame(games[id],r.mod)?.name||r.game)+((games[id]?.educational||r.guided)?(r.guided?' · Prática guiada':' · Psicoeducação'):' · '+LEVELS[(r.level||1)-1])+'</b><small>'+esc(r.athlete)+(modById(r.mod)?' · '+esc(modById(r.mod).name):'')+' · '+new Date(r.date).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})+'</small></div><div class="r"><b>'+((games[id]?.educational||r.guided)?'Concluída':'+'+ptsOf(r)+' pts')+'</b><small>'+((games[id]?.educational||r.guided)?'Sem nota':r.accuracy+'% · '+md[1]+(r.ms==null?'':' · '+seconds(r.ms)+' s'))+'</small></div></div>'}).join('')+(list.length>30?'<p class="notice" style="margin-top:10px">Mostrando as 30 mais recentes. O CSV inclui todas.</p>':''):'<div class="empty"><p>'+(hFilter==='mine'&&!name?'Identifique-se para ver suas sessões.':'Suas sessões concluídas aparecerão aqui.')+'</p></div>';
 }
@@ -2022,9 +2026,9 @@ $('rankingLevel').onchange=e=>{curLevel=Number(e.target.value);if(profile){profi
 $('export').onclick=()=>{
   if(!records.length){$('storage').style.color='var(--muted)';$('storage').textContent='Conclua uma sessão para exportar resultados.';return}
   const esc2=v=>'"'+String(v??'').replace(/^[=+@\-\t\r]/,"'$&").replaceAll('"','""')+'"';
-  const rows=[['Data ISO','Código','Modalidade','Jogo','Nível','Acertos','Erros','Tentativas','Precisão (%)','Pontos','Medalha','Tempo médio (s)','Antecipações','Palavras puladas','Mediana (s)','Reações válidas (s)'],...records.map(r=>[r.date,r.athlete,modById(r.mod)?.name||'',games[gid(r)]?.name||r.game,(games[gid(r)]?.educational||r.guided)?'':r.level,(games[gid(r)]?.educational||r.guided)?'':r.hits,(games[gid(r)]?.educational||r.guided)?'':r.errors,r.total,(games[gid(r)]?.educational||r.guided)?'':r.accuracy,ptsOf(r),(games[gid(r)]?.educational||r.guided)?'Concluída':MEDAL[medalOf(r.accuracy)][1],r.ms==null?'':seconds(r.ms),r.falseStarts??0,r.skipped??0,r.medianMs==null?'':seconds(r.medianMs),(r.samples||[]).map(x=>seconds(x)).join(' | ')])];
+  const rows=[['Data ISO','Código','Modalidade','Jogo','Nível','Acertos','Erros','Tentativas','Precisão (%)','Pontos','Medalha','Tempo médio (s)','Antecipações','Palavras puladas','Mediana (s)','Reações válidas (s)'],...visibleRankingRecords().map(r=>[r.date,r.athlete,modById(r.mod)?.name||'',games[gid(r)]?.name||r.game,(games[gid(r)]?.educational||r.guided)?'':r.level,(games[gid(r)]?.educational||r.guided)?'':r.hits,(games[gid(r)]?.educational||r.guided)?'':r.errors,r.total,(games[gid(r)]?.educational||r.guided)?'':r.accuracy,ptsOf(r),(games[gid(r)]?.educational||r.guided)?'Concluída':MEDAL[medalOf(r.accuracy)][1],r.ms==null?'':seconds(r.ms),r.falseStarts??0,r.skipped??0,r.medianMs==null?'':seconds(r.medianMs),(r.samples||[]).map(x=>seconds(x)).join(' | ')])];
   const url=URL.createObjectURL(new Blob(['﻿'+rows.map(row=>row.map(esc2).join(';')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
-  const a=document.createElement('a');a.href=url;a.download='near-lab-olimpiada.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const a=document.createElement('a');a.href=url;a.download='near-lab-treinamento.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
 /* ---------- sobre ---------- */
@@ -2199,22 +2203,35 @@ function demoHTML(i){const g=displayGame(games[i]),t=sportTheme();if(!t)return '
 
 /* Perfil autorizado no Supabase; modalidade de treino só nesta sessão. */
 function isTherapist(){return profile?.therapist===true;}
-function therapistResult(title,detail){stage('result');$('pBadge').textContent='Treino sem pontuação';$('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge try">Modo terapeuta · sem pontuação</span><h2>'+esc(title)+'</h2><p>'+esc(detail)+'</p><p class="notice">Treino concluído. Sem registro no ranking, sem pontos NEAR e sem identificação do paciente.</p></div><div class="res-actions"><button class="btn btn-go" data-act="again">Repetir treino</button><button class="btn" data-act="intro">Mudar nível</button><button class="btn" data-act="games">Escolher atividade</button></div></div>';renderTherapist();}
+function therapistResult(title,detail){stage('result');$('pBadge').textContent='Treino sem pontuação';$('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge try">Modo psicólogo do esporte · sem pontuação</span><h2>'+esc(title)+'</h2><p>'+esc(detail)+'</p><p class="notice">Treino concluído. Sem registro no ranking, sem pontos NEAR e sem identificação do paciente.</p></div><div class="res-actions"><button class="btn btn-go" data-act="again">Repetir treino</button><button class="btn" data-act="intro">Mudar nível</button><button class="btn" data-act="games">Escolher atividade</button></div></div>';renderTherapist();}
 function renderTherapist(){
- let panel=$('therapistPanel');if(!panel){panel=document.createElement('section');panel.id='therapistPanel';panel.className='notice';panel.style.cssText='margin:12px auto;padding:16px;max-width:1100px;border:2px solid var(--brand,#0b7a6c);border-radius:16px';document.body.prepend(panel);}
+ let panel=$('therapistPanel');if(!panel){panel=document.createElement('section');panel.id='therapistPanel';panel.className='professional-panel';document.body.prepend(panel);}
  panel.hidden=!isTherapist();if(!isTherapist())return;
- panel.innerHTML='<b>Modo terapeuta · treino sem pontuação</b><p>Escolha a modalidade para este atendimento. Nenhum treino entra no ranking ou gera pontos NEAR.</p><label>Modalidade <select id="therapyMod" aria-label="Modalidade do atendimento">'+mods.map(m=>'<option value="'+m.id+'"'+(m.id===profile.mod?' selected':'')+'>'+esc(m.name)+'</option>').join('')+'</select></label>'+(active?'<small> Encerre a atividade para trocar a modalidade.</small>':'');
- $('therapyMod').disabled=active;$('therapyMod').onchange=e=>{saveModality(e.target.value).then(()=>route()).catch(err=>alert(err.message));};
- if($('chip')){$('chip').querySelector('small').textContent=(modById(profile.mod)?.name||'Escolha modalidade')+' · Terapeuta';}
+ panel.innerHTML='<div><b>Modo psicólogo do esporte</b><p>Treino sem ranking e sem pontos NEAR.</p></div><div class="professional-controls"><label>Modalidade<select id="therapyMod" aria-label="Modalidade do atendimento">'+mods.map(m=>'<option value="'+m.id+'"'+(m.id===profile.mod?' selected':'')+'>'+esc(m.name)+'</option>').join('')+'</select></label><label>Nível<select id="therapyLevel" aria-label="Nível do atendimento">'+LEVELS.map((l,i)=>'<option value="'+(i+1)+'"'+(curLevel===i+1?' selected':'')+'>'+esc(l)+'</option>').join('')+'</select></label></div>'+(active?'<small>Encerre a atividade para alterar modalidade ou nível.</small>':'');
+ $('therapyMod').disabled=$('therapyLevel').disabled=active;
+ $('therapyMod').onchange=e=>{saveModality(e.target.value).then(()=>route()).catch(err=>alert(err.message));};
+ $('therapyLevel').onchange=e=>{curLevel=profile.level=Number(e.target.value);saveProfile();route();};
+ if($('chip')){$('chip').querySelector('small').textContent=(modById(profile.mod)?.name||'Escolha modalidade')+' · Psicólogo do esporte';}
  if($('btnReal'))$('btnReal').textContent='Começar treino sem pontuação';if($('btnPractice'))$('btnPractice').hidden=true;
- if($('inNoPoints')){$('inNoPoints').hidden=false;$('inNoPoints').textContent='Modo terapeuta: sem ranking e sem pontos NEAR.';}if($('inBest'))$('inBest').hidden=true;if($('inCat')&&games[selected].educational)$('inCat').textContent='Gestão das emoções · treino sem pontuação';
- if($('pBadge')&&stageName==='run')$('pBadge').textContent='Terapeuta · não pontua';
- if($('nearPanel'))$('nearPanel').innerHTML='<b>Modo terapeuta</b><p>As atividades desta conta não geram pontos NEAR.</p>';
+ if($('inNoPoints')){$('inNoPoints').hidden=false;$('inNoPoints').textContent='Modo psicólogo do esporte: sem ranking e sem pontos NEAR.';}if($('inBest'))$('inBest').hidden=true;if($('inCat')&&games[selected].educational)$('inCat').textContent='Gestão das emoções · treino sem pontuação';
+ if($('pBadge')&&stageName==='run')$('pBadge').textContent='Treino · sem pontos';
+ if($('nearPanel'))$('nearPanel').innerHTML='<b>Atendimento · sem pontos NEAR</b><p>O retorno das atividades fica apenas na sessão atual.</p>';
 }
 const therapyChip=renderChip;renderChip=function(){therapyChip();renderTherapist();};
 const therapyIntro=renderIntro;renderIntro=function(){therapyIntro();renderTherapist();};
 const therapyStage=stage;stage=function(s){therapyStage(s);renderTherapist();};
 const therapyNear=renderNear;renderNear=function(){therapyNear();if(isTherapist())renderTherapist();};
+
+
+function stopGuideVoice(){if('speechSynthesis' in window)speechSynthesis.cancel();}
+function speakGuide(text){if(!soundOn||!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined')return;stopGuideVoice();const u=new SpeechSynthesisUtterance(text);u.lang='pt-BR';u.rate=.9;speechSynthesis.speak(u);}
+// Busca local: não envia termos nem informações do atendimento.
+let activityQuery='';
+function filterActivities(){const q=activityQuery.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();let shown=0;for(const id of ['gmCards','gmEmotion','gmMind']){const root=$(id);if(!root)continue;root.querySelectorAll('.gcard').forEach(card=>{const text=card.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();card.hidden=!!q&&!text.includes(q);if(!card.hidden)shown++;});root.querySelectorAll('.activity-group').forEach(h=>{h.hidden=!Array.from(h.nextElementSibling.querySelectorAll('.gcard')).some(c=>!c.hidden);});}if($('activityCount'))$('activityCount').textContent=shown?shown+' atividades encontradas.':'Nenhuma atividade encontrada. Experimente memória, atenção ou respiração.';}
+const reviewedGames=renderGames;renderGames=function(){reviewedGames();let tools=$('activityTools');if(!tools){tools=document.createElement('div');tools.id='activityTools';tools.className='activity-tools';$('gmCards').before(tools);}tools.innerHTML='<label for="activitySearch">Buscar atividade ou habilidade</label><input id="activitySearch" type="search" placeholder="Ex.: memória, atenção, palavras…" autocomplete="off"><p id="activityCount" role="status" aria-live="polite"></p>';$('activitySearch').value=activityQuery;$('activitySearch').oninput=e=>{activityQuery=e.target.value;filterActivities();};filterActivities();if(isTherapist()){$('gmProgress').innerHTML='<div class="notice">Escolha uma atividade para o atendimento. O nível e a modalidade podem ser alterados no painel acima.</div>';$('emotionProgress').textContent='Situações variadas a cada sessão, com complexidade ajustada ao nível. Sem pontuação e sem registro das respostas.';}renderTherapist();};
+
+function visibleRankingRecords(){return rankingScope?records.filter(r=>r.mod===rankingScope):[];}
+const localModRows=modRows;modRows=function(){const local=localModRows();return mods.map(m=>{const entry=modalitySummary.find(x=>x.mod===m.id&&Number(x.level)===curLevel);if(entry)return {m,n:Number(entry.n),avg:Number(entry.avg),sessions:Number(entry.sessions||0),medals:[0,0,0]};return local.find(x=>x.m.id===m.id)||{m,n:0,avg:0,sessions:0,medals:[0,0,0]};}).sort((a,b)=>b.avg-a.avg||b.n-a.n||a.m.name.localeCompare(b.m.name,'pt-BR'));};
 
 bootCloud();
 
