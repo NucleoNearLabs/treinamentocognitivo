@@ -982,10 +982,10 @@ const G=[
  keys:'Teclado: ← → · Toque: botões',
  rule:'Vale apenas a direção da seta do meio. No Inicial ela tem destaque azul; no Intermediário e Avançado todas têm a mesma aparência, sem quadro ou cor de destaque. Ignore os estímulos laterais. Se o centro estiver vazio, não toque até a próxima rodada. No nível inicial os judocas laterais ajudam; nos níveis intermediário e avançado eles podem apontar para o lado oposto. O tempo diminui conforme o nível.'},
 {name:'Largada',skill:'Tempo de reação',time:'≈ 1 min',unit:'etapas',scene:'pool',
- desc:'Reaja ao BIP da largada. Queimar a largada é erro.',
- steps:['Ouça: “Aos seus lugares… Prontos…”. A espera varia de 1,5 a 4 segundos.','Quando soar o BIP e a luz ficar verde, toque LARGAR o mais rápido possível.','Largar antes do BIP é queimar a largada e conta como erro.'],
+ desc:'Reaja ao FOEE da largada. Queimar a largada é erro.',
+ steps:['Ouça: “Aos seus lugares… Prontos…”. A espera varia de 1,5 a 4 segundos.','Quando soar o FOEE e a luz ficar verde, toque LARGAR o mais rápido possível.','Largar antes do FOEE é queimar a largada e conta como erro.'],
  keys:'Espaço ou botão LARGAR',
- rule:'Aguarde o BIP. A espera varia aleatoriamente de 1,5 a 4 segundos. Quando a luz da raia ficar verde, aperte espaço ou LARGAR. Antecipar conta como erro. São 12 rodadas; o tempo é medido apenas nas respostas corretas e exibido a cada largada.'},
+ rule:'Aguarde o FOEE. A espera varia aleatoriamente de 1,5 a 4 segundos. Quando a luz da raia ficar verde, aperte espaço ou LARGAR. Antecipar conta como erro. São 12 rodadas; o tempo é medido apenas nas respostas corretas e exibido a cada largada.'},
 {name:'Voga e comando',skill:'Atenção dividida',time:'≈ 1 min',unit:'etapas',scene:'river',
  desc:'Duas tarefas ao mesmo tempo: o lado da remada e o comando do timoneiro.',
  steps:['Esquerda: o lado do barco com as pás acesas. Toque Bombordo (esquerda) ou Boreste (direita).','Direita: o timoneiro grita um número. Toque Par ou Ímpar.','A rodada só pontua se as duas respostas estiverem certas dentro do tempo.'],
@@ -1057,7 +1057,7 @@ function writeLocal(key,value){try{localStorage.setItem(key,JSON.stringify(value
 function cloudStatus(message){cloudMessage=message;const n=$('cloudStatus');if(n)n.textContent=message;if($('storage'))$('storage').textContent=message;}
 function setSession(data){authSession={...data,expires_at:data.expires_at||Math.floor(Date.now()/1000)+(data.expires_in||3600)};writeLocal(SESSION_KEY,authSession)}
 function usernameOf(user){return (user.email||'').split('@')[0]}
-function setAccount(user){const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};curLevel=profile.level;}
+function setAccount(user){const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';if(profile.therapist){try{profile.mod=sessionStorage.getItem('near-therapy-mod-'+user.id)||profile.mod}catch{}}curLevel=profile.level;}
 async function authRequest(path,body,access){
   const res=await fetch(SUPABASE_URL+'/auth/v1/'+path,{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json',...(access?{Authorization:'Bearer '+access}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000)});
   const data=await res.json().catch(()=>({}));
@@ -1083,7 +1083,7 @@ async function logoutAccount(){
   if(access)authRequest('logout?scope=local',null,access).catch(()=>{});
   cloudStatus('Você saiu. Entre para jogar e consultar o ranking.');renderChip();
 }
-function queueResult(r){outbox.push(r);const saved=writeLocal(QUEUE_KEY,outbox);cloudStatus(saved?'Resultado pendente de envio. Sincronizando…':'Resultado ainda não enviado. Mantenha esta página aberta até sincronizar.');}
+function queueResult(r){if(isTherapist())return;outbox.push(r);const saved=writeLocal(QUEUE_KEY,outbox);cloudStatus(saved?'Resultado pendente de envio. Sincronizando…':'Resultado ainda não enviado. Mantenha esta página aberta até sincronizar.');}
 function cloudRecord(row){const d=row.detalhes||{};return {...d,id:row.id,athleteId:row.atleta_id,athlete:row.apelido,mod:modById(row.modalidade)?row.modalidade:null,game:row.jogo,gameId:row.jogo==='Caça-palavras da ginástica'?11:games.findIndex(g=>g.name===row.jogo),level:row.nivel,points:row.pontos,accuracy:Number(row.precisao??row.pontos),date:row.criado_em,hits:Number(d.hits||0),errors:Number(d.errors||0),total:Number(d.total||1)};}
 async function databaseRequest(path,options={}){
   const access=await accessToken();return fetch(SUPABASE_URL+'/rest/v1/'+path,{...options,headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+access,'Content-Type':'application/json',...options.headers},signal:AbortSignal.timeout(15000)});
@@ -1091,7 +1091,7 @@ async function databaseRequest(path,options={}){
 function repaintCloud(){renderChip();const view=document.body.dataset.view;if(view==='team')renderTeam();else if(view==='games')renderGames();else if(view==='home')renderHome();}
 function syncCloud(){
   if(syncing)return syncing;if(!profile||!authSession)return Promise.resolve();
-  const owner=profile.id;
+  const owner=profile.id;if(isTherapist()){outbox=outbox.filter(r=>r.athleteId!==owner);writeLocal(QUEUE_KEY,outbox);nearPending=nearPending.filter(r=>r.owner!==owner);writeLocal(NEAR_QUEUE,nearPending);}
   syncing=(async()=>{try{
     cloudStatus('Sincronizando resultados…');
     for(const r of outbox.filter(r=>r.athleteId===owner)){
@@ -1119,7 +1119,7 @@ setInterval(()=>{if(profile&&!active&&$('onboard').hidden)syncCloud()},30000);
 
 
 async function saveModality(mod){
-  if(!modById(mod))throw new Error('Escolha sua modalidade.');
+  if(!modById(mod))throw new Error('Escolha sua modalidade.');if(isTherapist()){profile.mod=mod;try{sessionStorage.setItem('near-therapy-mod-'+profile.id,mod)}catch{}repaintCloud();return;}
   if(profile.mod&&records.some(r=>r.athleteId===profile.id&&r.mod))throw new Error('Você já pontuou por uma modalidade. Peça a correção à organização.');
   const access=await accessToken();const res=await fetch(SUPABASE_URL+'/auth/v1/user',{method:'PUT',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+access,'Content-Type':'application/json'},body:JSON.stringify({data:{modalidade:mod}}),signal:AbortSignal.timeout(15000)});
   if(!res.ok)throw new Error('Não foi possível salvar a modalidade. Confira sua conexão.');
@@ -1387,13 +1387,13 @@ const NEAR_QUEUE='near-daily-claims-v1';
 let nearState={balance:0,today_points:0,credited:[],day:null,daily_max:50},nearMessage='Entre para acompanhar sua rotina.',nearBusy=null;
 let nearPending=readLocal(NEAR_QUEUE,[]);if(!Array.isArray(nearPending))nearPending=[];
 function nearKey(id){return games[id]?.educational?'emocao-'+id:id===10?'pausa':null}
-function nearQueue(r){if(!nearKey(r.gameId))return;if(!nearPending.some(p=>p.id===r.id)){nearPending.push({id:r.id,owner:r.athleteId});writeLocal(NEAR_QUEUE,nearPending)}nearMessage='Conclusão registrada. Pontos NEAR aguardam confirmação online.';renderNear();}
+function nearQueue(r){if(isTherapist())return;if(!nearKey(r.gameId))return;if(!nearPending.some(p=>p.id===r.id)){nearPending.push({id:r.id,owner:r.athleteId});writeLocal(NEAR_QUEUE,nearPending)}nearMessage='Conclusão registrada. Pontos NEAR aguardam confirmação online.';renderNear();}
 function renderNear(){
   const panel=$('nearPanel');if(panel)panel.innerHTML='<div class="near-heading"><div><small>PONTOS NEAR · ROTINA DE PRÁTICA</small><b>'+nearState.balance+' <span>pontos acumulados</span></b></div><div><small>Hoje'+(nearState.day?' · '+nearState.day.split('-').reverse().join('/'):' · aguardando confirmação')+'</small><b>'+nearState.today_points+'/'+nearState.daily_max+'</b></div></div><p>10 pontos por cada atividade emocional e 10 por uma pausa guiada ao dia. Repetições são livres. O dia segue o horário de Brasília. Sem conexão, o crédito considera o dia em que a conclusão é sincronizada.</p><div class="near-credits">'+[17,18,19,20,10].map(id=>'<span class="'+(nearState.credited.includes(nearKey(id))?'credited':'')+'">'+(nearState.credited.includes(nearKey(id))?'✓ ':'○ ')+(id===10?'Uma pausa guiada':esc(games[id].name))+'</span>').join('')+'</div><p class="notice">'+esc(nearMessage)+' Pontos de participação, separados do ranking cognitivo. Benefícios futuros ainda serão definidos.</p>';
   const status=$('nearResult');if(status){const credited=nearState.credited.includes(nearKey(selected));status.innerHTML='<b>'+nearState.balance+' pontos NEAR acumulados</b><p>'+esc(credited?'Esta atividade já recebeu o crédito diário. Você pode repetir para praticar.':nearMessage)+'</p>';}
 }
 async function nearRpc(name,body){const res=await databaseRequest('rpc/'+name,{method:'POST',body:JSON.stringify(body||{})});if(!res.ok){const d=await res.json().catch(()=>({}));const err=new Error(d.message||'Não foi possível confirmar os pontos NEAR.');err.code=d.code;throw err}return res.json()}
-function syncNear(){if(nearBusy)return nearBusy;if(!profile||!authSession)return Promise.resolve();const owner=profile.id;nearBusy=(async()=>{try{
+function syncNear(){if(nearBusy)return nearBusy;if(!profile||!authSession||isTherapist())return Promise.resolve();const owner=profile.id;nearBusy=(async()=>{try{
   for(const claim of nearPending.filter(p=>p.owner===owner)){
     const data=await nearRpc('near_claim_daily',{p_resultado_id:claim.id});if(profile?.id!==owner)return;
     nearState=data;nearPending=nearPending.filter(p=>p.id!==claim.id);writeLocal(NEAR_QUEUE,nearPending);
@@ -1431,7 +1431,7 @@ function guidedPractice(s){
     else{orb.className='guided-orb natural';orb.textContent='Presente';if(!guidedFree){const index=Math.min(practice.steps.length-1,Math.floor(guidedElapsed/practice.seconds*practice.steps.length));prompt.textContent=practice.steps[index];}else prompt.textContent='Deixe o ar entrar e sair no seu ritmo, sem forçar.';}
     if(remaining<=0){finishGuided(practice);return}later(tick,100);};tick();
 }
-function finishGuided(practice){
+function finishGuided(practice){if(isTherapist()){active=false;cancel();therapistResult(practice.name,'Prática concluída.');return;}
   active=false;cancel();$('pBar').style.width='100%';
   const r={id:crypto.randomUUID(),athleteId:profile.id,date:new Date().toISOString(),athlete:profile.name,mod:profile.mod,game:games[10].name,gameId:10,level:1,points:0,accuracy:0,hits:0,errors:0,total:1,ms:null,samples:[],guided:true,completed:true,practice_id:practice.id,duration_seconds:practice.seconds};
   records.push(r);queueResult(r);nearQueue(r);persist();renderChip();stage('result');$('pBadge').textContent='Prática concluída';
@@ -1627,7 +1627,7 @@ function demoHTML(i){if(games[i]?.educational)return '<p class="demo-cap">Situa�
   if(i===2)return lab+'<div class="target-line" style="--c:#c2255c">Atleta <b>42</b></div><div class="bibs mini" style="grid-template-columns:repeat(3,1fr)"><span class="bib">24</span><span class="bib right">42</span><span class="bib">47</span></div>'+cap('Toque a ficha <b>42</b>, não a 24.');
   if(i===3)return lab+'<div class="demo-row"><span class="medal-ring" style="--ap:#ae3ec9">'+APP.fita.svg+'</span><span class="stim" style="font-size:44px">→</span></div>'+cap('Fita: siga. Toque <b>Direita</b>.')+'<div class="demo-row"><span class="medal-ring" style="--ap:#e03131">'+APP.bola.svg+'</span><span class="stim" style="font-size:44px">→</span></div>'+cap('Bola: inverta. Toque <b>Esquerda</b>.');
   if(i===4)return lab+'<div class="jrow"><span class="jd">←</span><span class="jd">←</span><span class="jd c">→</span><span class="jd">←</span><span class="jd">←</span></div>'+cap('Só vale o judoca azul: toque <b>Direita →</b>.');
-  if(i===5)return lab+'<div class="pool-wrap">'+POOL_SVG.replace('class="pool"','class="pool"')+'</div><div class="demo-row"><span class="pill wait">Prontos…</span><span>→</span><span class="pill go">BIP!</span></div>'+cap('Toque LARGAR só depois do <b>BIP</b>.');
+  if(i===5)return lab+'<div class="pool-wrap">'+POOL_SVG.replace('class="pool"','class="pool"')+'</div><div class="demo-row"><span class="pill wait">Prontos…</span><span>→</span><span class="pill go">FOEE!</span></div>'+cap('Toque LARGAR só depois do <b>FOEE</b>.');
   if(i===6)return lab+'<div class="demo-row" style="align-items:flex-start;gap:20px">'+boatSVG(0)+'<div class="bubble">47!</div></div>'+cap('Pás acesas à esquerda: <b>Bombordo</b>. Número 47: <b>Ímpar</b>.');
   if(i===7)return lab+'<div class="tenn">'+tennisSVG(2).replace('class="lane" data-z="2"','class="lane hit" data-z="2"')+'</div><div class="callout">Juiz de linha: ESQUERDA</div>'+cap('A bola quicou à direita: toque <b>Direita</b>.');
   if(i===8)return lab+'<div class="shirts-board" style="gap:2px"><span class="jersey" style="width:52px;height:52px">'+JERSEY(23)+'</span><span class="jersey" style="width:52px;height:52px">'+JERSEY(7)+'</span><span class="jersey" style="width:52px;height:52px">'+JERSEY(41)+'</span></div>'+cap('Crescente: toque <b>7 → 23 → 41</b>.');
@@ -1693,7 +1693,7 @@ function stats(){
   const mind=selected===10||games[selected].educational;
   $('stRound').textContent=selected===10?'—':Math.min(round,total)+'/'+total;
   $('stHits').textContent=mind?'—':hits;$('stErrors').textContent=mind?'—':errors;
-  $('stPoints').textContent=(mind||mode==='practice')?'—':'+'+Math.round(hits/total*100);
+  $('stPoints').textContent=(mind||mode==='practice'||isTherapist())?'—':'+'+Math.round(hits/total*100);
   if(games[selected].educational)$('pBar').style.width=Math.max(0,(round-1)/total*100)+'%';
   if(!mind)$('pBar').style.width=Math.min(100,(hits+errors)/total*100)+'%';
 }
@@ -1793,15 +1793,25 @@ function judoGame(s){
 }
 
 /* 5 · Natação — Largada (tempo de reação) */
+function swimStartSound(){
+  if(!soundOn)return;
+  if(profile?.mod==='natacao'){
+    if('speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined'){
+      speechSynthesis.cancel();const cue=new SpeechSynthesisUtterance('FOEE');cue.lang='pt-BR';cue.rate=1;cue.volume=1;speechSynthesis.speak(cue);
+    }
+    return;
+  }
+  sfx('beep');
+}
 function swimGame(s){
   expected='wait';pending=true;
   s.className='stim call';s.style.color='#856b10';s.textContent='Prepare-se…';
   const wrap=el('div','pool-wrap');wrap.innerHTML='<div class="sport-cue-scene">'+sportSurfaceSVG()+'<span>'+sportArt(sportTheme()?.kit[0]||'ball')+'</span></div>';$('arena').append(wrap);
   controls(['INICIAR / espaço'],()=>respond(1),'btn btn-go btn-lg');
-  fb('Espere o BIP.','');
+  fb('Espere o FOEE.','');
   const wait=1500+rand(2501);
   if(wait>1900)later(()=>{s.textContent='Prontos…'},900);
-  later(()=>{s.textContent='JÁ!';s.style.color='#17803d';wrap.firstChild.classList.add('cue-go');sfx('beep');expected=1;onset=performance.now();fb('Responda agora!','');const lim=[2500,1800,1200][level-1];limitBar(lim);later(()=>respond(-1),lim)},wait);
+  later(()=>{s.textContent=profile?.mod==='natacao'?'FOEE!':'JÁ!';s.style.color='#17803d';wrap.firstChild.classList.add('cue-go');swimStartSound();expected=1;onset=performance.now();fb('Responda agora!','');const lim=[2500,1800,1200][level-1];limitBar(lim);later(()=>respond(-1),lim)},wait);
 }
 
 /* 6 · Remo — Voga e comando (atenção dividida) */
@@ -1857,13 +1867,14 @@ function codeGame(s){
   const keyState={};const keys={};
   const kb=el('div','kb');
   ['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'].forEach((r,ri)=>{const kr=el('div','kbr');
-    if(ri===2){const e=button('ENTER',()=>enter(),'key wide');kr.append(e)}
     r.split('').forEach(ch=>{const k=button(ch,()=>type(ch),'key');keys[ch]=k;kr.append(k)});
     if(ri===2){const bk=button('⌫',()=>back(),'key wide');bk.setAttribute('aria-label','Apagar');kr.append(bk)}
     kb.append(kr)});
   const hintButton=button('Dica',()=>{if(!pending)return;hintText.textContent='Dica: '+currentWord.hint;hintButton.disabled=true;hintButton.textContent='Dica revelada'},'btn btn-sm');
-  const skip=button('Pular palavra',()=>{if(!pending)return;pending=false;skipped++;errors++;hintButton.disabled=skip.disabled=true;cancel();stats();fb('Palavra pulada: '+secret+'. Esta rodada vale zero pontos.','bad');later(next,2200)},'btn btn-sm');
-  const tools=el('div','choices');tools.append(hintButton,skip);
+  const skip=button('PULAR',()=>{if(!pending)return;pending=false;skipped++;errors++;hintButton.disabled=skip.disabled=true;cancel();stats();fb('Palavra pulada: '+secret+'. Esta rodada vale zero pontos.','bad');later(next,2200)},'key wide');
+  skip.setAttribute('aria-label','Pular palavra');kb.lastElementChild.prepend(skip);
+  const submitWord=button('ENTER',()=>enter(),'btn btn-sm');submitWord.setAttribute('aria-label','Confirmar palavra');
+  const tools=el('div','choices');tools.append(hintButton,submitWord);
   $('arena').append(sport,board,hintText,kb,tools);
   function paint(){cells[attempts].cells.forEach((c,i)=>{c.textContent=cur[i]||'';c.classList.toggle('f',!!cur[i])})}
   function type(ch){if(!pending||cur.length>=N)return;cur+=ch;paint();sfx('tick')}
@@ -1911,7 +1922,7 @@ function abortRun(msg){
   active=false;cancel();stage('result');$('pBadge').textContent='Encerrada';
   $('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge">Sessão encerrada</span><h2>'+esc(displayGame(games[selected]).name)+'</h2><p class="muted" style="margin-top:8px">'+esc(msg)+'</p></div><div class="res-actions"><button class="btn btn-go btn-lg" data-act="again" type="button">Recomeçar</button><div class="row3"><button class="btn" data-act="intro" type="button">Ver regras</button><button class="btn" data-act="games" type="button">Outro jogo</button><button class="btn" data-act="team" type="button">Ver equipe</button></div></div></div>';
 }
-function finish(){
+function finish(){if(isTherapist()){active=false;cancel();const detail=games[selected].educational?'Estratégias alinhadas na primeira escolha: '+eduFirstCorrect+' de '+eduFirstAnswered+'.':hits+' acertos em '+total+' etapas · '+errors+' erros'+(rts.length?' · Tempo médio: '+seconds(Math.round(rts.reduce((a,b)=>a+b,0)/rts.length))+' s':'');therapistResult(displayGame(games[selected]).name,detail);return;}
   active=false;cancel();$('pBar').style.width='100%';
   if(games[selected].educational){const r={id:crypto.randomUUID(),athleteId:profile.id,date:new Date().toISOString(),athlete:profile.name,mod:profile.mod,game:games[selected].name,gameId:selected,level,points:0,accuracy:0,hits:0,errors:0,total:1,ms:null,samples:[],education:true,completed:true};records.push(r);queueResult(r);nearQueue(r);persist();renderChip();showEducationResult();syncCloud();return}
   const accuracy=Math.round(hits/total*100),avg=rts.length?Math.round(rts.reduce((a,b)=>a+b,0)/rts.length):null;
@@ -2184,6 +2195,26 @@ const baseRenderChip=renderChip;renderChip=function(){applySportTheme();baseRend
 const baseIntro=renderIntro;renderIntro=function(){applySportTheme();baseIntro();const t=sportTheme();if(t){$('introBox').style.setProperty('--c',t.accent);$('inCat').textContent=modById(profile.mod).name+' · '+games[selected].skill;}};
 const baseStartRun=startRun;startRun=function(mode){applySportTheme();baseStartRun(mode);const t=sportTheme();if(t){$('arena').dataset.scene='sport';$('arena').dataset.surface=t.surface;}};
 function demoHTML(i){const g=displayGame(games[i]),t=sportTheme();if(!t)return '<p class="demo-cap">'+esc(g.steps[0])+'</p>';return '<div class="sport-demo"><span>'+themedItems()[i%11].icon+'</span><div><b>'+esc(g.name)+'</b><p>'+esc(g.steps[0])+'</p></div></div>';}
+
+
+/* Perfil autorizado no Supabase; modalidade de treino só nesta sessão. */
+function isTherapist(){return profile?.therapist===true;}
+function therapistResult(title,detail){stage('result');$('pBadge').textContent='Treino sem pontuação';$('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge try">Modo terapeuta · sem pontuação</span><h2>'+esc(title)+'</h2><p>'+esc(detail)+'</p><p class="notice">Treino concluído. Sem registro no ranking, sem pontos NEAR e sem identificação do paciente.</p></div><div class="res-actions"><button class="btn btn-go" data-act="again">Repetir treino</button><button class="btn" data-act="intro">Mudar nível</button><button class="btn" data-act="games">Escolher atividade</button></div></div>';renderTherapist();}
+function renderTherapist(){
+ let panel=$('therapistPanel');if(!panel){panel=document.createElement('section');panel.id='therapistPanel';panel.className='notice';panel.style.cssText='margin:12px auto;padding:16px;max-width:1100px;border:2px solid var(--brand,#0b7a6c);border-radius:16px';document.body.prepend(panel);}
+ panel.hidden=!isTherapist();if(!isTherapist())return;
+ panel.innerHTML='<b>Modo terapeuta · treino sem pontuação</b><p>Escolha a modalidade para este atendimento. Nenhum treino entra no ranking ou gera pontos NEAR.</p><label>Modalidade <select id="therapyMod" aria-label="Modalidade do atendimento">'+mods.map(m=>'<option value="'+m.id+'"'+(m.id===profile.mod?' selected':'')+'>'+esc(m.name)+'</option>').join('')+'</select></label>'+(active?'<small> Encerre a atividade para trocar a modalidade.</small>':'');
+ $('therapyMod').disabled=active;$('therapyMod').onchange=e=>{saveModality(e.target.value).then(()=>route()).catch(err=>alert(err.message));};
+ if($('chip')){$('chip').querySelector('small').textContent=(modById(profile.mod)?.name||'Escolha modalidade')+' · Terapeuta';}
+ if($('btnReal'))$('btnReal').textContent='Começar treino sem pontuação';if($('btnPractice'))$('btnPractice').hidden=true;
+ if($('inNoPoints')){$('inNoPoints').hidden=false;$('inNoPoints').textContent='Modo terapeuta: sem ranking e sem pontos NEAR.';}if($('inBest'))$('inBest').hidden=true;if($('inCat')&&games[selected].educational)$('inCat').textContent='Gestão das emoções · treino sem pontuação';
+ if($('pBadge')&&stageName==='run')$('pBadge').textContent='Terapeuta · não pontua';
+ if($('nearPanel'))$('nearPanel').innerHTML='<b>Modo terapeuta</b><p>As atividades desta conta não geram pontos NEAR.</p>';
+}
+const therapyChip=renderChip;renderChip=function(){therapyChip();renderTherapist();};
+const therapyIntro=renderIntro;renderIntro=function(){therapyIntro();renderTherapist();};
+const therapyStage=stage;stage=function(s){therapyStage(s);renderTherapist();};
+const therapyNear=renderNear;renderNear=function(){therapyNear();if(isTherapist())renderTherapist();};
 
 bootCloud();
 
