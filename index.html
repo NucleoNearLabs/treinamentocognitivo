@@ -689,6 +689,8 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
 .signal-scene{position:relative;isolation:isolate;min-height:245px;border-radius:18px;overflow:hidden;background:var(--sport-soft);color:var(--brand)}.signal-environment{position:absolute;inset:45% 0 0;opacity:.5;z-index:-1}.signal-environment svg{width:100%;height:100%;object-fit:cover}.signal-board{position:relative;display:grid;justify-items:center;gap:5px;padding-top:18px;color:#17394a}.signal-lamp{display:grid;place-items:center;width:64px;height:64px;border:5px solid #fff;border-radius:50%;background:#17803d;color:#fff;font-size:35px;font-weight:900;box-shadow:0 3px 15px #17394a25}.signal-wait .signal-lamp{background:#b45f06}.signal-board b{padding:5px 10px;border-radius:16px;background:#fff;font-size:13px}.signal-board span{font-size:12px;background:#ffffffd9;padding:3px 8px;border-radius:8px}.signal-side{position:absolute;top:36%;width:44px;opacity:.65}.signal-side svg{width:100%;height:auto}.signal-side.left{left:8%}.signal-side.right{right:8%}.signal-athlete{height:88px;display:flex;justify-content:center}.signal-athlete svg{height:100%;width:105px}.pool.cue-go .light{fill:#17803d;filter:drop-shadow(0 0 3px #fff)}.pool .light{fill:#eab438}.pool .sw{transition:transform .55s ease-in-out}.pool{display:block;width:100%;height:auto}@media(prefers-reduced-motion:reduce){.pool .sw{transition:none}}
 
 .professional-panel[data-training-active=true] .professional-controls,.professional-panel[data-training-active=true] .private-controls,.professional-panel[data-training-active=true]>small:not(#privateRunLabel),.professional-panel[data-training-active=true]>div:first-child p{display:none}.professional-panel[data-training-active=true]{padding:12px 16px;gap:5px}.professional-panel[data-training-active=true] #privateRunLabel{display:block;width:100%;color:#526b78}.private-controls{width:100%;border-top:1px solid #d7e3e6;padding-top:14px;display:grid;gap:10px}.private-controls label,.private-sheet form label{display:grid;gap:6px;font-weight:700;font-size:14px}.private-controls select,.private-sheet select,.private-sheet input{font:inherit;color:#163443;background:#fff;border:1px solid #b8ccd3;border-radius:10px;padding:10px;min-height:44px;max-width:100%;width:100%}.private-actions{display:flex;flex-wrap:wrap;gap:8px}.private-controls p{font-size:12px;margin:0}.private-overlay{position:fixed;inset:0;z-index:1000;background:#102e3ba8;padding:24px;overflow:auto;overscroll-behavior:contain}.private-sheet{background:#fff;border-radius:20px;max-width:1000px;margin:20px auto;padding:24px;color:#102e3b;box-shadow:0 16px 80px #0003}.private-sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px}.private-sheet-head h2{font-size:24px;margin:0}.private-sheet p{margin:8px 0 14px}.private-sheet form{display:grid;gap:16px;max-width:600px}.private-summaries{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}.private-summary,.private-result{border:1px solid #cddfe4;background:var(--sport-soft,#edf6f7);border-radius:14px;padding:16px}.private-summary small,.private-table small{display:block;color:#526b78;line-height:1.5}.private-summary p{margin:8px 0;font-size:14px}.private-table-wrap{overflow:auto}.private-table{width:100%;border-collapse:collapse;font-size:14px;text-align:left}.private-table th,.private-table td{padding:12px;border-bottom:1px solid #d7e3e6;vertical-align:top}.private-table th{background:#f0f6f7}.private-result{margin:16px 0}.private-result h3{margin:0 0 8px}.private-result p{font-size:14px}@media(max-width:560px){.private-overlay{padding:8px}.private-sheet{padding:16px;margin:8px auto}.private-sheet-head h2{font-size:21px}.private-actions .btn{flex:1 1 130px}.private-summaries{grid-template-columns:1fr}.private-table th,.private-table td{padding:9px;font-size:12px}}
+
+.personal-chip-position{font-size:11px!important;line-height:1.25;color:#456573!important}.personal-rank-card{padding:22px;border-radius:18px;background:var(--soft,#e9f2f0);border:1px solid #cbdee2;margin-bottom:20px}.personal-rank-card h2{font-size:clamp(24px,5vw,36px);margin:8px 0}.personal-rank-card p{margin:8px 0;color:#456573}.personal-rank-card>small{font-weight:800;letter-spacing:.05em}.personal-levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}@media(max-width:560px){.personal-rank-card{padding:16px}.personal-levels .btn{width:100%}.chip{height:auto}}
 </style>
 </head>
 <body data-view="home">
@@ -839,7 +841,7 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
   <div class="page-head">
     <span class="eyebrow">Treinamento · placar recreativo</span>
     <h1 id="teamTitle" tabindex="-1">Equipe.</h1>
-    <p>Notas coletivas das modalidades e ranking individual exclusivo da sua modalidade. Sem classificação de capacidade cognitiva.</p>
+    <p>Sua colocação individual na modalidade e notas coletivas, sem identificação dos outros atletas. Sem classificação de capacidade cognitiva.</p>
   </div>
   <label class="ranking-filter">Comparar no mesmo nível <select id="rankingLevel"><option value="1">Inicial</option><option value="2">Intermediário</option><option value="3">Avançado</option></select></label><p class="notice">Ranking por melhores resultados em cada jogo. Sessões de níveis diferentes ficam separadas.</p><div id="tmSummary"></div>
   <div class="panel">
@@ -848,8 +850,8 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
     <div id="tmMods"></div>
   </div>
   <div class="panel">
-    <h2>Atletas da sua modalidade</h2>
-    <p class="muted" style="font-size:14px">Somente atletas da sua modalidade. Toque em um participante para ver os pontos por jogo.</p>
+    <h2>Sua classificação</h2>
+    <p class="muted" style="font-size:14px">Somente seu nome e seus resultados são exibidos. Sua colocação considera os atletas da mesma modalidade e nível.</p>
     <div id="tmBoard"></div>
   </div>
   <div class="panel">
@@ -921,7 +923,7 @@ body[data-sport]:not([data-sport=""]) .rhythm-pulse{color:var(--sport-accent);bo
 
 </main>
 
-<p class="foot-note" id="footNote">Atividades lúdicas de prática cognitiva. Não constituem teste psicológico nem avaliação clínica. Detalhes em <a href="#/sobre">Sobre</a>.<br><small>Versão 04.11 · Atletas de sessão</small></p>
+<p class="foot-note" id="footNote">Atividades lúdicas de prática cognitiva. Não constituem teste psicológico nem avaliação clínica. Detalhes em <a href="#/sobre">Sobre</a>.<br><small>Versão 04.11 · Colocação pessoal</small></p>
 
 <nav class="tabbar" id="tabbar" aria-label="Principal">
   <a href="#/" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Início</a>
@@ -1045,7 +1047,7 @@ const searchWords=[{"word": "CESTA", "sport": "Basquete", "hint": "Está ligada 
 
 /* ---------- estado ---------- */
 const KEY='near-lab-cloud-cache-v4',PKEY='near-lab-cloud-level-v3',SKEY='near-lab-som';
-let records=[],profile=null,curLevel=1,hFilter='all',rankingScope=null,modalitySummary=[];
+let records=[],profile=null,curLevel=1,hFilter='all',rankingScope=null,modalitySummary=[],personalRanks=[],personalRankReady=false;
 let selected=0,active=false,token=0,timers=[],pending=false,round=0,hits=0,errors=0,rts=[],onset=0,expected=null,level=1,seq=[],pos=0,total=12,identity='',mode='real',stageName='intro',streak=0;
 let digitOrder=[],digitPos=0,secret='',attempts=0,currentWord=null,falseStarts=0,skipped=0,usedWords=new Set(),codeInput=null;
 let bb={ball:null,spots:[],pass:null};
@@ -1065,7 +1067,7 @@ function writeLocal(key,value){try{localStorage.setItem(key,JSON.stringify(value
 function cloudStatus(message){cloudMessage=message;const n=$('cloudStatus');if(n)n.textContent=message;if($('storage'))$('storage').textContent=message;}
 function setSession(data){authSession={...data,expires_at:data.expires_at||Math.floor(Date.now()/1000)+(data.expires_in||3600)};writeLocal(SESSION_KEY,authSession)}
 function usernameOf(user){return (user.email||'').split('@')[0]}
-function setAccount(user){rankingScope=user.app_metadata?.near_rank_mod||user.user_metadata?.modalidade||null;modalitySummary=[];const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';if(profile.therapist){try{profile.mod=modById(sessionStorage.getItem('near-therapy-mod-'+user.id))?.id||profile.mod}catch{}}curLevel=profile.level;}
+function setAccount(user){rankingScope=user.app_metadata?.near_rank_mod||user.user_metadata?.modalidade||null;modalitySummary=[];personalRanks=[];personalRankReady=false;const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';if(profile.therapist){try{profile.mod=modById(sessionStorage.getItem('near-therapy-mod-'+user.id))?.id||profile.mod}catch{}}curLevel=profile.level;}
 async function authRequest(path,body,access){
   const res=await fetch(SUPABASE_URL+'/auth/v1/'+path,{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json',...(access?{Authorization:'Bearer '+access}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000)});
   const data=await res.json().catch(()=>({}));
@@ -1108,9 +1110,9 @@ function syncCloud(){
       if(!res.ok){const error=await res.json().catch(()=>({}));if(!(res.status===409&&error.code==='23505'))throw new Error('Envio recusado ('+res.status+'). Confira a tabela resultados e suas permissões.');}
       outbox=outbox.filter(x=>x.id!==r.id);writeLocal(QUEUE_KEY,outbox);
     }
-    const contextRes=await databaseRequest('rpc/near_ranking_context',{method:'POST',body:'{}'});if(!contextRes.ok){records=[];persist();throw new Error('Ative o SQL de privacidade do ranking no Supabase.');}const context=await contextRes.json();if(profile?.id!==owner)return;rankingScope=context.modality;modalitySummary=context.summary||[];records=records.filter(r=>r.mod===rankingScope);persist();
+    const contextRes=await databaseRequest('rpc/near_ranking_context',{method:'POST',body:'{}'});if(!contextRes.ok){records=[];persist();throw new Error('Ative o SQL de privacidade do ranking no Supabase.');}const context=await contextRes.json();if(profile?.id!==owner)return;rankingScope=context.modality;modalitySummary=context.summary||[];personalRanks=context.my_ranks||[];personalRankReady=Array.isArray(context.my_ranks);records=records.filter(r=>r.mod===rankingScope);persist();
     const all=[];let offset=0;
-    while(true){const res=await databaseRequest('resultados?select=*&modalidade=eq.'+encodeURIComponent(rankingScope||'__nenhuma__')+'&order=criado_em.asc,id.asc&limit=500&offset='+offset);if(!res.ok)throw new Error('Não foi possível consultar o ranking ('+res.status+'). Confira as permissões.');const rows=await res.json();all.push(...rows.map(cloudRecord));if(rows.length<500)break;offset+=rows.length;}
+    while(true){const res=await databaseRequest('resultados?select=*&atleta_id=eq.'+encodeURIComponent(owner)+'&modalidade=eq.'+encodeURIComponent(rankingScope||'__nenhuma__')+'&order=criado_em.asc,id.asc&limit=500&offset='+offset);if(!res.ok)throw new Error('Não foi possível consultar o ranking ('+res.status+'). Confira as permissões.');const rows=await res.json();all.push(...rows.map(cloudRecord));if(rows.length<500)break;offset+=rows.length;}
     if(profile?.id!==owner)return;
     const ids=new Set(all.map(r=>r.id));records=all.concat(outbox.filter(r=>r.athleteId===owner&&!ids.has(r.id)));persist();
     const count=outbox.filter(r=>r.athleteId===owner).length;cloudStatus(count?count+' resultado(s) pendente(s) neste aparelho.':'Pontos sincronizados online · '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));repaintCloud();await syncNear();
@@ -1119,7 +1121,7 @@ function syncCloud(){
 async function bootCloud(){
   outbox=readLocal(QUEUE_KEY,[]);if(!Array.isArray(outbox))outbox=[];
   const saved=readLocal(SESSION_KEY,null);
-  if(saved?.access_token&&saved?.refresh_token&&saved?.user?.id){authSession=saved;setAccount(saved.user);records=readLocal(KEY,[]);if(!Array.isArray(records))records=[];records=records.filter(r=>rankingScope&&r.mod===rankingScope);persist();}
+  if(saved?.access_token&&saved?.refresh_token&&saved?.user?.id){authSession=saved;setAccount(saved.user);records=readLocal(KEY,[]);if(!Array.isArray(records))records=[];records=records.filter(r=>rankingScope&&r.mod===rankingScope&&r.athleteId===profile.id);persist();}
   if(profile){try{const token=await accessToken();const res=await fetch(SUPABASE_URL+'/auth/v1/user',{headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)});if(res.ok){const user=await res.json();authSession.user=user;setSession(authSession);setAccount(user)}}catch{}}
   route();if(profile)await syncCloud();
 }
@@ -1474,7 +1476,7 @@ function totals(){
 function places(rows,fn){let prev=null,pl=0;return rows.map((r,i)=>{const v=fn(r);if(v!==prev)pl=i+1;prev=v;return pl})}
 function rowFor(name){return name?totals().find(r=>playerKey(r.name)===playerKey(name))||null:null}
 function playerTotal(name){return rowFor(name)?.total||0}
-function rankOf(name){const rows=totals(),pl=places(rows,r=>r.total),i=rows.findIndex(r=>playerKey(r.name)===playerKey(name));return i<0?null:{place:pl[i],of:rows.length}}
+function rankOf(name){if(!profile||playerKey(name)!==playerKey(profile.name))return null;const r=personalRanks.find(r=>Number(r.level)===curLevel);return r?{place:Number(r.place),of:Number(r.of)}:null;}
 function playedCount(row){return row?row.counts.filter((c,i)=>c>0&&games[i].competitive).length:0}
 function bestFor(name,id){if(!name)return null;const k=playerKey(name);const a=records.filter(r=>playerKey(r.athlete)===k&&gid(r)===id&&r.level===curLevel).map(r=>r.accuracy);return a.length?Math.max(...a):null}
 function countFor(name,id){if(!name)return 0;const k=playerKey(name);return records.filter(r=>playerKey(r.athlete)===k&&gid(r)===id&&r.level===curLevel).length}
@@ -1668,7 +1670,7 @@ function syncSeg(){
   document.querySelectorAll('#inSeg button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.level===curLevel));
   $('inLvlNote').textContent=games[selected].educational?['3 situações diretas, com 2 alternativas por caso. Sem cronômetro.','4 situações com mais contexto e 3 alternativas por caso. Sem cronômetro.','5 situações com prioridades concorrentes e 4 alternativas por caso. Sem cronômetro.'][curLevel-1]:LEVEL_TEXT[curLevel-1][1];
 }
-document.querySelectorAll('#inSeg button').forEach(b=>b.onclick=()=>{curLevel=+b.dataset.level;if(profile){profile.level=curLevel;saveProfile()}syncSeg()});
+document.querySelectorAll('#inSeg button').forEach(b=>b.onclick=()=>{curLevel=+b.dataset.level;if(profile){profile.level=curLevel;saveProfile()}syncSeg();renderChip()});
 $('btnReal').onclick=()=>startRun('real');
 $('btnPractice').onclick=()=>startRun('practice');
 
@@ -1997,14 +1999,14 @@ $('resultBox').addEventListener('click',e=>{
 /* ---------- equipe ---------- */
 function renderTeam(){
   $('storage').textContent=cloudMessage;$('rankingLevel').value=String(curLevel);
-  const rows=totals(),pl=places(rows,r=>r.total),name=profile?profile.name:'';
+  const rows=totals(),pl=rows.map(()=>rankOf(profile?.name)?.place||'—'),name=profile?profile.name:'';
   const mr=modRows(),mpl=places(mr,x=>x.avg);
   const activeMods=mr.filter(x=>x.n>0).length;
-  $('tmSummary').innerHTML='<div class="sum3"><div><small>Atletas</small><b>'+rows.length+'</b></div><div><small>Modalidades em disputa</small><b>'+activeMods+' de '+mods.length+'</b></div><div><small>Sessões registradas</small><b>'+visibleRankingRecords().length+'</b></div></div>';
+  $('tmSummary').innerHTML='<div class="sum3"><div><small>Atletas da modalidade</small><b>'+(modalitySummary.find(x=>x.mod===rankingScope&&Number(x.level)===curLevel)?.n||0)+'</b></div><div><small>Modalidades em disputa</small><b>'+activeMods+' de '+mods.length+'</b></div><div><small>Suas sessões registradas</small><b>'+visibleRankingRecords().length+'</b></div></div>';
   const me=rowFor(name),rk=name?rankOf(name):null;
   if(name&&modById(profile.mod)){
     const pm=modById(rankingScope)||modById(profile.mod),mi=mr.findIndex(x=>x.m.id===pm.id);
-    $('tmSummary').innerHTML+=me?'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><div class="mc"><small>Posição na modalidade</small><b>'+rk.place+'º de '+rk.of+'</b></div><div class="mc"><small>Pontos</small><b>'+me.total+'</b></div><div class="mc"><small>Sua modalidade</small><b>'+(mr[mi].n?mpl[mi]+'º':'—')+'</b></div><a class="btn btn-go" href="#/jogos">Jogar</a></div>':'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><span>Complete uma sessão para entrar no placar.</span><a class="btn btn-go" href="#/jogos">Jogar agora</a></div>';
+    $('tmSummary').innerHTML+=me?'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><div class="mc"><small>Posição na modalidade</small><b>'+(rk?rk.place+'º de '+rk.of:'Aguardando sincronização')+'</b></div><div class="mc"><small>Pontos</small><b>'+me.total+'</b></div><div class="mc"><small>Sua modalidade</small><b>'+(mr[mi].n?mpl[mi]+'º':'—')+'</b></div><a class="btn btn-go" href="#/jogos">Jogar</a></div>':'<div class="me-card"><div class="who"><small>Você · '+esc(pm.name)+'</small><b>'+esc(name)+'</b></div><span>Complete uma sessão para entrar no placar.</span><a class="btn btn-go" href="#/jogos">Jogar agora</a></div>';
   }
   const maxAvg=Math.max(1,...mr.map(x=>x.avg));
   $('tmMods').innerHTML=mr.map((x,i)=>{const mine=profile&&x.m.id===rankingScope;if(!mine)return '<div class="mrow" style="--c:'+x.m.c+'"><span class="pl">'+(x.n?mpl[i]:'—')+'</span><span class="ico">'+x.m.icon+'</span><span class="mname"><b>'+esc(x.m.name)+'</b><small>Nota coletiva · sem dados individuais</small></span><b class="lb-pts">'+(x.n?num1(x.avg):'—')+'</b></div>';
@@ -2232,7 +2234,7 @@ let activityQuery='';
 function filterActivities(){const q=activityQuery.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();let shown=0;for(const id of ['gmCards','gmEmotion','gmMind']){const root=$(id);if(!root)continue;root.querySelectorAll('.gcard').forEach(card=>{const text=card.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();card.hidden=!!q&&!text.includes(q);if(!card.hidden)shown++;});root.querySelectorAll('.activity-group').forEach(h=>{h.hidden=!Array.from(h.nextElementSibling.querySelectorAll('.gcard')).some(c=>!c.hidden);});}if($('activityCount'))$('activityCount').textContent=shown?shown+' atividades encontradas.':'Nenhuma atividade encontrada. Experimente memória, atenção ou respiração.';}
 const reviewedGames=renderGames;renderGames=function(){reviewedGames();let tools=$('activityTools');if(!tools){tools=document.createElement('div');tools.id='activityTools';tools.className='activity-tools';$('gmCards').before(tools);}tools.innerHTML='<label for="activitySearch">Buscar atividade ou habilidade</label><input id="activitySearch" type="search" placeholder="Ex.: memória, atenção, palavras…" autocomplete="off"><p id="activityCount" role="status" aria-live="polite"></p>';$('activitySearch').value=activityQuery;$('activitySearch').oninput=e=>{activityQuery=e.target.value;filterActivities();};filterActivities();if(isTherapist()){$('gmProgress').innerHTML='<div class="notice">Escolha uma atividade para o atendimento. O nível e a modalidade podem ser alterados no painel acima.</div>';$('emotionProgress').textContent='Situações variadas a cada sessão, com complexidade ajustada ao nível. Conclusão registrada no histórico privado do atleta; sem ranking emocional.';}renderTherapist();};
 
-function visibleRankingRecords(){return rankingScope?records.filter(r=>r.mod===rankingScope):[];}
+function visibleRankingRecords(){return rankingScope&&profile?records.filter(r=>r.mod===rankingScope&&r.athleteId===profile.id):[];}
 const localModRows=modRows;modRows=function(){const local=localModRows();return mods.map(m=>{const entry=modalitySummary.find(x=>x.mod===m.id&&Number(x.level)===curLevel);if(entry)return {m,n:Number(entry.n),avg:Number(entry.avg),sessions:Number(entry.sessions||0),medals:[0,0,0]};return local.find(x=>x.m.id===m.id)||{m,n:0,avg:0,sessions:0,medals:[0,0,0]};}).sort((a,b)=>b.avg-a.avg||b.n-a.n||a.m.name.localeCompare(b.m.name,'pt-BR'));};
 
 /* Atletas e treinos de atendimento: sem acesso ao ranking/NEAR. */
@@ -2297,6 +2299,12 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('privateManager'
 document.addEventListener('keydown',e=>{const d=$('privateManager');if(e.key!=='Tab'||!d||d.hidden)return;const items=[...d.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled])')];if(!items.length)return;const first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});
 
 const privateBaseStats=stats;stats=function(){privateBaseStats();if(isTherapist()&&!games[selected].educational&&selected!==10){$('stPoints').parentElement.querySelector('small').textContent='Sessão (0–100)';$('stPoints').textContent=String(Math.round(hits/Math.max(1,total)*100));}else $('stPoints').parentElement.querySelector('small').textContent='Pontos';};
+
+
+// Classificação individual fornecida pelo servidor, sem dados de terceiros.
+function personalPositionText(){const rank=profile?rankOf(profile.name):null;return rank?rank.place+'º de '+rank.of+' · '+LEVELS[curLevel-1]:personalRankReady?'Sem classificação no '+LEVELS[curLevel-1]:'Colocação aguardando sincronização';}
+const personalChip=renderChip;renderChip=function(){personalChip();if(!profile||isTherapist())return;const tx=$('chip').querySelector('.tx');if(tx){const note=el('small','personal-chip-position',personalPositionText());tx.append(note);$('chip').setAttribute('aria-label',$('chip').getAttribute('aria-label')+' '+note.textContent);}};
+const personalTeam=renderTeam;renderTeam=function(){personalTeam();if(!profile)return;document.querySelectorAll('.tabs button[data-f="all"]').forEach(b=>b.textContent='Meu histórico');document.querySelectorAll('.tabs button[data-f="mine"]').forEach(b=>b.hidden=true);if(isTherapist())return;const box=el('section','personal-rank-card');box.innerHTML='<small>MINHA COLOCAÇÃO · '+esc(modById(rankingScope)?.name||'modalidade')+'</small><h2>'+esc(personalPositionText())+'</h2><p>Comparação no mesmo nível. Os nomes e os resultados individuais dos demais atletas ficam privados.</p>'+(personalRanks.length?'<div class="personal-levels">'+personalRanks.map(r=>'<button class="btn btn-sm" type="button" data-personal-level="'+Number(r.level)+'">'+esc(LEVELS[Number(r.level)-1])+' · '+Number(r.place)+'º de '+Number(r.of)+' · '+Number(r.total)+' pts</button>').join('')+'</div>':'<p>Conclua uma atividade valendo pontos para entrar na classificação. Treinos do atendimento não entram no ranking.</p>');$('tmSummary').prepend(box);box.querySelectorAll('[data-personal-level]').forEach(b=>b.onclick=()=>{curLevel=profile.level=Number(b.dataset.personalLevel);saveProfile();renderChip();renderTeam();});};
 
 bootCloud();
 
