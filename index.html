@@ -1072,7 +1072,7 @@ function writeLocal(key,value){try{localStorage.setItem(key,JSON.stringify(value
 function cloudStatus(message){cloudMessage=message;const n=$('cloudStatus');if(n)n.textContent=message;if($('storage'))$('storage').textContent=message;}
 function setSession(data){authSession={...data,expires_at:data.expires_at||Math.floor(Date.now()/1000)+(data.expires_in||3600)};writeLocal(SESSION_KEY,authSession)}
 function usernameOf(user){return (user.email||'').split('@')[0]}
-function setAccount(user){rankingScope=user.app_metadata?.near_rank_mod||user.user_metadata?.modalidade||null;modalitySummary=[];personalRanks=[];personalRankReady=false;const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';profile.master=user.app_metadata?.near_admin===true;if(profile.master&&!profile.mod)profile.mod='ginastica-artistica';if(profile.therapist){try{profile.mod=modById(sessionStorage.getItem('near-therapy-mod-'+user.id))?.id||profile.mod}catch{}}curLevel=profile.level;}
+function setAccount(user){rankingScope=user.app_metadata?.near_rank_mod||user.user_metadata?.modalidade||null;modalitySummary=[];personalRanks=[];personalRankReady=false;const name=usernameOf(user);let saved=1;try{saved=Number(localStorage.getItem(PKEY+user.id))||1}catch{}nearState=readLocal('near-status-'+user.id,{balance:0,today_points:0,credited:[],day:null,daily_max:50});nearMessage='Saldo NEAR aguardando confirmação online.';profile={id:user.id,name,mod:modById(user.user_metadata?.modalidade)?user.user_metadata.modalidade:null,level:[1,2,3].includes(saved)?saved:1};profile.therapist=user.app_metadata?.near_role==='therapist';profile.master=user.app_metadata?.near_admin===true;profile.canChangeModality=user.app_metadata?.near_can_change_modality===true&&!profile.therapist&&!profile.master;if(profile.master&&!profile.mod)profile.mod='ginastica-artistica';if(profile.therapist){try{profile.mod=modById(sessionStorage.getItem('near-therapy-mod-'+user.id))?.id||profile.mod}catch{}}curLevel=profile.level;}
 async function authRequest(path,body,access){
   const res=await fetch(SUPABASE_URL+'/auth/v1/'+path,{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json',...(access?{Authorization:'Bearer '+access}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000)});
   const data=await res.json().catch(()=>({}));
@@ -1136,10 +1136,14 @@ setInterval(()=>{if(profile&&!active&&$('onboard').hidden)syncCloud()},30000);
 
 async function saveModality(mod){
   if(!modById(mod))throw new Error('Escolha sua modalidade.');if(isTherapist()){profile.mod=mod;try{sessionStorage.setItem('near-therapy-mod-'+profile.id,mod)}catch{}repaintCloud();return;}
-  if(profile.mod&&records.some(r=>r.athleteId===profile.id&&r.mod))throw new Error('Você já pontuou por uma modalidade. Peça a correção à organização.');
+  if(active)throw new Error('Encerre a partida antes de trocar de modalidade.');
+  if(mod===profile.mod)return;
+  if(!profile.canChangeModality&&profile.mod&&records.some(r=>r.athleteId===profile.id&&r.mod))throw new Error('Você já pontuou por uma modalidade. Peça a correção à organização.');
   const access=await accessToken();const res=await fetch(SUPABASE_URL+'/auth/v1/user',{method:'PUT',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+access,'Content-Type':'application/json'},body:JSON.stringify({data:{modalidade:mod}}),signal:AbortSignal.timeout(15000)});
   if(!res.ok)throw new Error('Não foi possível salvar a modalidade. Confira sua conexão.');
-  const user=await res.json();authSession.user=user;setSession(authSession);setAccount(user);repaintCloud();
+  const user=await res.json();authSession.user=user;setSession(authSession);setAccount(user);records=records.filter(r=>r.mod===mod);persist();repaintCloud();
+  if(syncing)await syncing;
+  await syncCloud();
 }
 
 /* Caça-palavras: uma sessão, pontuação proporcional às palavras encontradas. */
@@ -1596,9 +1600,10 @@ function renderOb(){
     box.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{obMod=b.dataset.m;box.querySelectorAll('[data-m]').forEach(x=>x.setAttribute('aria-checked',x===b))});
     $('saveModButton').onclick=async()=>{const b=$('saveModButton');b.disabled=true;try{await saveModality(obMod);obStep=3;renderOb()}catch(err){$('obErr').textContent=err.message;b.disabled=false}};
   }else{
-    box.innerHTML=close+'<h2 id="obTitle">Olá, '+esc(profile.name)+'</h2><p>'+esc(modById(profile.mod).name)+' · Escolha seu nível. Você pode mudar antes de cada jogo.</p><div class="lvls" role="radiogroup" aria-label="Nível">'+LEVEL_TEXT.map((t,i)=>'<button type="button" class="lvl" role="radio" data-l="'+(i+1)+'" aria-checked="'+(obLevel===i+1)+'"><span class="radio"></span><span><b>'+t[0]+'</b><small>'+t[1]+'</small></span></button>').join('')+'</div><div class="ob-actions"><button class="btn" id="logoutButton" type="button">Sair da conta</button><button class="btn btn-go btn-lg" id="obNext" type="button">Ir para os jogos →</button></div>';
+    box.innerHTML=close+'<h2 id="obTitle">Olá, '+esc(profile.name)+'</h2><p>'+esc(modById(profile.mod).name)+' · Escolha seu nível. Você pode mudar antes de cada jogo.</p><div class="lvls" role="radiogroup" aria-label="Nível">'+LEVEL_TEXT.map((t,i)=>'<button type="button" class="lvl" role="radio" data-l="'+(i+1)+'" aria-checked="'+(obLevel===i+1)+'"><span class="radio"></span><span><b>'+t[0]+'</b><small>'+t[1]+'</small></span></button>').join('')+'</div><div class="ob-actions">'+(profile.canChangeModality?'<button class="btn" id="changeModButton" type="button">Trocar modalidade</button>':'')+'<button class="btn" id="logoutButton" type="button">Sair da conta</button><button class="btn btn-go btn-lg" id="obNext" type="button">Ir para os jogos →</button></div>';
     box.querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{obLevel=+b.dataset.l;box.querySelectorAll('.lvl').forEach(x=>x.setAttribute('aria-checked',x===b))});
     $('obNext').onclick=()=>{profile.level=obLevel;curLevel=obLevel;saveProfile();closeOb(true);if(location.hash==='#/jogos')route();else location.hash='#/jogos'};
+    if(profile.canChangeModality)$('changeModButton').onclick=()=>{obStep=4;renderOb()};
     $('logoutButton').onclick=async()=>{await logoutAccount();renderOb();renderChip()};
   }
   $('obClose').onclick=()=>closeOb(false);
